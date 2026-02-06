@@ -1,0 +1,349 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeUp, pageFade, staggerContainer } from "../utils/motionPresets";
+
+const LandingPage = () => {
+  const navigate = useNavigate();
+  const [isCtaLoading, setIsCtaLoading] = useState(false);
+
+  const handleGetStarted = () => {
+    setIsCtaLoading(true);
+    navigate("/auth/google");
+  };
+
+  return (
+    <motion.div className="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display" {...pageFade}>
+      <div className="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] dark:border-b-[#2a3441] bg-white/80 dark:bg-[#101622]/80 backdrop-blur-md px-4 sm:px-10 py-3">
+          <div className="flex items-center gap-4 text-[#111318] dark:text-white">
+            <div className="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+              <span className="material-symbols-outlined !text-[20px]">qr_code_scanner</span>
+            </div>
+            <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">NYDev Form Generator</h2>
+          </div>
+          <div className="hidden md:flex flex-1 justify-end gap-8">
+            <div className="flex items-center gap-9">
+              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#features">
+                Features
+              </a>
+              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#how-it-works">
+                How it Works
+              </a>
+              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#pricing">
+                Pricing
+              </a>
+              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/auth/google">
+                Login
+              </a>
+            </div>
+            <button
+              className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={isCtaLoading}
+              onClick={handleGetStarted}
+              type="button"
+            >
+              <span className="truncate">{isCtaLoading ? "Starting..." : "Get Started"}</span>
+            </button>
+          </div>
+          <div className="md:hidden flex items-center">
+            <button className="text-[#111318] dark:text-white">
+              <span className="material-symbols-outlined">menu</span>
+            </button>
+          </div>
+        </header>
+        <div className="layout-container flex h-full grow flex-col">
+          <div className="flex flex-1 justify-center py-5">
+            <motion.div className="layout-content-container flex flex-col max-w-[1200px] flex-1 px-4 sm:px-6 lg:px-8" variants={staggerContainer} initial="initial" animate="animate">
+              <div className="@container">
+                <div className="flex flex-col-reverse gap-6 py-10 lg:flex-row lg:items-center lg:gap-16 lg:py-20">
+                  <motion.div className="flex flex-col gap-6 lg:w-1/2 lg:min-w-[400px]" variants={fadeUp}>
+                    <div className="flex flex-col gap-4 text-left">
+                      <span className="text-primary font-bold text-sm tracking-wider uppercase">Event Management Simplified</span>
+                      <h1 className="text-[#111318] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl lg:text-6xl">
+                        Create Smart Registration Forms with <span className="text-primary">QR Verification</span>
+                      </h1>
+                      <h2 className="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed sm:text-lg">
+                        Streamline your event check-ins and data collection. Build intelligent forms in minutes and use our instant QR code verification system for seamless entry.
+                      </h2>
+                    </div>
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <button
+                        className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 disabled:opacity-60 disabled:cursor-not-allowed"
+                        disabled={isCtaLoading}
+                        onClick={handleGetStarted}
+                        type="button"
+                      >
+                        <span className="truncate">{isCtaLoading ? "Starting..." : "Create Free Form"}</span>
+                      </button>
+                      <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white dark:bg-[#1a2332] border border-[#dbdfe6] dark:border-[#2a3441] text-[#111318] dark:text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-50 dark:hover:bg-[#253042] transition-colors">
+                        <span className="truncate flex items-center gap-2">
+                          <span className="material-symbols-outlined text-lg">play_circle</span>
+                          View Demo
+                        </span>
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-4 pt-4">
+                      <div className="flex -space-x-3">
+                        <div
+                          className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
+                          data-alt="User avatar 1"
+                          style={{
+                            backgroundImage:
+                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuDthEg3Cq64_YhsL8XqVc-mccDHp4kTD-S2fkl6KObAvcOZE_Lg2pPrxBEUrbbziPLcN9g6NU4dNT9ghSZFetRojR3pWeL9XfdcgChnG5UCb0FGpSrkKCmHhtnCCLJ9h10Ek5J8q8ZVev8G7gzQwXlmlTV3fYpc0y6qqeSK639Pp4tP0Uz4ln1c3Ekq8BrbNVsNwViE32V9FUB_TTuBGJiEvC6q55zMHA9x164dxmeTKqr5feHoB7OV-DOs_8fbmvPrnOuGKMr7zpU)"
+                          }}
+                        ></div>
+                        <div
+                          className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
+                          data-alt="User avatar 2"
+                          style={{
+                            backgroundImage:
+                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuBPu6UryMDZ3pYdSsTDMO485A40Sl4HSbj40Ivd9fcVEjjm2yrg-m1pEEtfb1HSw2z86f9NWi_orQac8JP3DEAJHSV9cvyUm6E-rzWCLnKd8Fa5uNafHbU_7YUb-S4CYJmBvAxGiGtNy0vcaAos86_TGADODQCGiea6rb-mEyVV4HpufLOVoDtEbJzs7VQVlFh3yAxT7RmOFTDlutEdoW3PBZiLMyU7BqYjBEDx3jYgGlu0nYcGOTsiz2RQsvGPGzD0B-wAvHVKi1w)"
+                          }}
+                        ></div>
+                        <div
+                          className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
+                          data-alt="User avatar 3"
+                          style={{
+                            backgroundImage:
+                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuACvqvLfiLP-v3PqEkLndzE3oO7daC3cNTQ1m7WK9uRR6nzOlBj4jltFlhRQUWnldDMcx26gW6ITB3iETqt4tEh0bHWU2CfVN3KG1K_qosrYEDg62eSVgJGrZvuuxHcQ2vSF7Z2k2yo0oELzDlWE2Hc2xnR0vYT90vTr5N8AJKRpCoqfI2RmqAMlOR27SQZjOUCQj6zSfjn9dwfDIALdAki4QH1kKoOpbejFZD2PI-dY6ttpvaUP4Htv3E1yjWL8Ys41MNRyQtBg4A)"
+                          }}
+                        ></div>
+                      </div>
+                      <div className="text-sm text-[#616f89] dark:text-gray-400">
+                        <span className="font-bold text-[#111318] dark:text-white">2,000+</span> event organizers trust us
+                      </div>
+                    </div>
+                  </motion.div>
+                  <motion.div className="w-full lg:w-1/2 relative z-0" variants={fadeUp}>
+                    <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-purple-500/30 blur-3xl rounded-full opacity-30 animate-pulse"></div>
+                    <div className="relative w-full rounded-2xl bg-white dark:bg-[#1a2332] shadow-2xl border border-[#e5e7eb] dark:border-[#2a3441] overflow-hidden aspect-[4/3] flex flex-col">
+                      <div className="h-8 bg-[#f0f2f4] dark:bg-[#2a3441] border-b border-[#e5e7eb] dark:border-[#384455] flex items-center px-4 gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                      </div>
+                      <div className="flex-1 flex overflow-hidden">
+                        <div className="w-16 border-r border-[#e5e7eb] dark:border-[#384455] flex flex-col items-center py-4 gap-4 bg-gray-50 dark:bg-[#151c28]">
+                          <div className="w-8 h-8 rounded bg-primary/20 text-primary flex items-center justify-center">
+                            <span className="material-symbols-outlined text-sm">edit_document</span>
+                          </div>
+                          <div className="w-8 h-8 rounded text-gray-400 flex items-center justify-center">
+                            <span className="material-symbols-outlined text-sm">palette</span>
+                          </div>
+                          <div className="w-8 h-8 rounded text-gray-400 flex items-center justify-center">
+                            <span className="material-symbols-outlined text-sm">settings</span>
+                          </div>
+                        </div>
+                        <div className="flex-1 p-6 bg-white dark:bg-[#1a2332] relative">
+                          <div className="w-full h-8 bg-gray-100 dark:bg-[#2a3441] rounded mb-4 animate-pulse"></div>
+                          <div className="w-3/4 h-4 bg-gray-100 dark:bg-[#2a3441] rounded mb-8 animate-pulse"></div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <div className="h-3 w-12 bg-gray-200 dark:bg-[#384455] rounded"></div>
+                              <div className="h-10 w-full border border-gray-200 dark:border-[#384455] rounded bg-transparent"></div>
+                            </div>
+                            <div className="space-y-2">
+                              <div className="h-3 w-12 bg-gray-200 dark:bg-[#384455] rounded"></div>
+                              <div className="h-10 w-full border border-gray-200 dark:border-[#384455] rounded bg-transparent"></div>
+                            </div>
+                          </div>
+                          <div className="absolute bottom-6 right-6 w-48 bg-white dark:bg-[#101622] rounded-xl shadow-xl border border-gray-100 dark:border-[#2a3441] p-4 flex flex-col items-center gap-2 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
+                            <div className="w-24 h-24 bg-white p-1 rounded">
+                              <img
+                                alt="QR Code"
+                                className="w-full h-full object-contain"
+                                data-alt="QR Code Example"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9qoArRUoKRN6Uo1SMgbA5YyKajhBn-sK_1AhdKxo4zEFnpYsH0rNU2PegukjKgi4Rcw38GttRY1NxuOQTZ3pv7dZW7Piu2w77Jw_imJGTueii7XCzKgzfXzhX-ksPuH01wMdyOF8Y84Vtz2vsedzBcZ19NQ1t2NhkX3q-rJ2c2tDtSsyHpbeR1y9QI36JEIp4ohVYaSz4X0juCSsV7IwbQLEI4ANRW67MZ2SfsiXuYkuhgpHj6V1retlqs9d0aA0kuI6kkCjzp-4"
+                              />
+                            </div>
+                            <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400">SCAN TO VERIFY</p>
+                            <div className="flex items-center gap-1 text-green-500 text-xs font-bold">
+                              <span className="material-symbols-outlined text-sm">check_circle</span>
+                              Valid Ticket
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+              <motion.div id="how-it-works" className="py-16 md:py-24 border-t border-dashed border-[#e5e7eb] dark:border-[#2a3441]" variants={fadeUp}>
+                <div className="flex flex-col gap-4 text-center mb-16">
+                  <span className="text-primary font-bold text-sm tracking-wider uppercase">Process</span>
+                  <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.015em] sm:text-4xl">
+                    Simple Steps to Smart Registration
+                  </h2>
+                  <p className="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal max-w-[720px] mx-auto">
+                    Get started in minutes with our intuitive three-step process designed for efficiency and reliability.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                  <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
+                    <div className="w-14 h-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="material-symbols-outlined !text-[32px]">design_services</span>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-[#111318] dark:text-white text-xl font-bold leading-tight">1. Create Custom Form</h3>
+                      <p className="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-relaxed">
+                        Design your perfect registration form with our drag-and-drop builder. Add custom fields, logic, and branding without writing code.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
+                    <div className="w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="material-symbols-outlined !text-[32px]">share</span>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-[#111318] dark:text-white text-xl font-bold leading-tight">2. Share &amp; Collect</h3>
+                      <p className="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-relaxed">
+                        Distribute your form automatically via unique links, email campaigns, or embedded widgets. Watch responses roll in real-time.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
+                    <div className="w-14 h-14 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="material-symbols-outlined !text-[32px]">qr_code_scanner</span>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-[#111318] dark:text-white text-xl font-bold leading-tight">3. Verify Instantly</h3>
+                      <p className="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-relaxed">
+                        Every registration generates a unique QR code. Scan attendee codes at the door with our mobile app for secure, instant entry.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div id="pricing" className="py-10 mb-20" variants={fadeUp}>
+                <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-primary font-bold text-sm tracking-wider uppercase">Plans</span>
+                    <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.015em]">Flexible Pricing</h2>
+                  </div>
+                  <div className="flex bg-gray-100 dark:bg-[#1a2332] p-1 rounded-lg">
+                    <button className="px-4 py-2 text-sm font-bold rounded-md bg-white dark:bg-[#2a3441] shadow-sm text-[#111318] dark:text-white">Monthly</button>
+                    <button className="px-4 py-2 text-sm font-bold rounded-md text-[#616f89] dark:text-gray-400 hover:text-[#111318] dark:hover:text-white transition-colors">Yearly</button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="flex flex-col p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#e5e7eb] dark:border-[#2a3441]">
+                    <h3 className="text-lg font-bold text-[#111318] dark:text-white mb-2">Starter</h3>
+                    <div className="flex items-baseline gap-1 mb-6">
+                      <span className="text-4xl font-black text-[#111318] dark:text-white">$0</span>
+                      <span className="text-[#616f89] dark:text-gray-400">/mo</span>
+                    </div>
+                    <p className="text-[#616f89] dark:text-gray-400 text-sm mb-6">Perfect for small meetups and testing the waters.</p>
+                    <button className="w-full py-2.5 rounded-lg border border-primary text-primary font-bold text-sm mb-6 hover:bg-primary/5 transition-colors">Get Started Free</button>
+                    <ul className="flex flex-col gap-3 text-sm text-[#111318] dark:text-white">
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Up to 50 Registrations
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Basic Form Builder
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Email Support
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col p-6 rounded-2xl bg-[#101622] text-white border border-primary relative overflow-hidden transform md:-translate-y-4 shadow-2xl">
+                    <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Most Popular</div>
+                    <h3 className="text-lg font-bold mb-2 text-white">Professional</h3>
+                    <div className="flex items-baseline gap-1 mb-6">
+                      <span className="text-4xl font-black text-white">$29</span>
+                      <span className="text-gray-400">/mo</span>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-6">For professional event organizers.</p>
+                    <button className="w-full py-2.5 rounded-lg bg-primary text-white font-bold text-sm mb-6 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">Start Free Trial</button>
+                    <ul className="flex flex-col gap-3 text-sm text-gray-200">
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Unlimited Registrations
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>QR Code Check-in App
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Analytics Dashboard
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Custom Branding
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#e5e7eb] dark:border-[#2a3441]">
+                    <h3 className="text-lg font-bold text-[#111318] dark:text-white mb-2">Business</h3>
+                    <div className="flex items-baseline gap-1 mb-6">
+                      <span className="text-4xl font-black text-[#111318] dark:text-white">$99</span>
+                      <span className="text-[#616f89] dark:text-gray-400">/mo</span>
+                    </div>
+                    <p className="text-[#616f89] dark:text-gray-400 text-sm mb-6">Advanced features for large scale operations.</p>
+                    <button className="w-full py-2.5 rounded-lg border border-[#dbdfe6] dark:border-[#384455] text-[#111318] dark:text-white font-bold text-sm mb-6 hover:bg-gray-50 dark:hover:bg-[#253042] transition-colors">Contact Sales</button>
+                    <ul className="flex flex-col gap-3 text-sm text-[#111318] dark:text-white">
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>API Access
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>SSO Integration
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Dedicated Account Manager
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>SLA Support
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+              <footer className="border-t border-[#f0f2f4] dark:border-[#2a3441] pt-12 pb-8">
+                <div className="flex flex-col md:flex-row justify-between gap-8 mb-8">
+                  <div className="flex flex-col gap-4 max-w-sm">
+                    <div className="flex items-center gap-3 text-[#111318] dark:text-white">
+                      <div className="size-6 flex items-center justify-center bg-primary rounded text-white">
+                        <span className="material-symbols-outlined !text-[16px]">qr_code_scanner</span>
+                      </div>
+                      <h3 className="text-lg font-bold">NYDev Form Generator</h3>
+                    </div>
+                    <p className="text-[#616f89] dark:text-gray-400 text-sm">
+                      The smartest way to create forms and manage event entry with secure QR code technology.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
+                    <div className="flex flex-col gap-3">
+                      <h4 className="font-bold text-[#111318] dark:text-white">Product</h4>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#features">Features</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#pricing">Pricing</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="/org/integrations">Integrations</a>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <h4 className="font-bold text-[#111318] dark:text-white">Resources</h4>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Documentation</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Blog</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Community</a>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <h4 className="font-bold text-[#111318] dark:text-white">Company</h4>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">About</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Contact</a>
+                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Legal</a>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#9aa2b1] pt-8 border-t border-[#f0f2f4] dark:border-[#2a3441]">
+                  <p>&copy; 2023 NYDev. All rights reserved.</p>
+                  <div className="flex gap-4">
+                    <a className="hover:text-primary" href="#">Privacy Policy</a>
+                    <a className="hover:text-primary" href="#">Terms of Service</a>
+                  </div>
+                </div>
+              </footer>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default LandingPage;

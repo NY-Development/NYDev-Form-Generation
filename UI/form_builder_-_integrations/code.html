@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Integrations Management - NYDev Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1152d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="flex w-72 flex-col justify-between border-r border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 flex-shrink-0 transition-colors duration-300">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-1 ring-slate-200 dark:ring-slate-700" data-alt="User profile avatar gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiLku3bnFygcLoLQ2X87GvZ0gFo_7q2sRn7kU5kmviecQJ4-QnNNN6YAtcYpgoagMcsxky0D42Rp1z5E2KhoJauGubuOxdTkJ5flGmW6mWbdWwObriJyiwu1Bn3NflaET7NPJJfb3muuHJHO2vzVzajdpLcYeO4b_Gyph16XTQCKl8Tcp6VwUMtccO5oiIqCbgLpx_iMcoRdNbBFGMqyP4Y6N_0BLXcljF5XZogDkZ2aN9zPi5MhsHgFk5xBnKAp5mID_f6wHfVEc");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-medium leading-normal">NYDev Platform</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Organization Workspace</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<p class="text-sm font-medium leading-normal">Forms</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+<p class="text-sm font-medium leading-normal">Templates</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">extension</span>
+<p class="text-sm font-medium leading-normal">Integrations</p>
+</a>
+</div>
+</div>
+<div class="p-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto">
+<div class="w-full max-w-[1400px] mx-auto p-6 md:p-10 flex flex-col gap-8">
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Integrations</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Connect your forms with the tools you use every day.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors bg-white dark:bg-transparent">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-sm font-medium">Activity Log</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-blue-700 text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="text-sm font-medium">Request Integration</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-4 items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-6">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:border-primary focus:ring-primary dark:text-white shadow-sm" placeholder="Search integrations..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<button class="px-3 py-1.5 text-sm font-medium rounded-full bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white">All</button>
+<button class="px-3 py-1.5 text-sm font-medium rounded-full text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">CRM</button>
+<button class="px-3 py-1.5 text-sm font-medium rounded-full text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Marketing</button>
+<button class="px-3 py-1.5 text-sm font-medium rounded-full text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Payments</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow group relative">
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-[#E8F5E9] border border-[#C8E6C9]">
+<img alt="Google Sheets Logo" class="size-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuF6MLHqaYOipxgRJ-Qf6h4R5w6Xitn34XsOO2aBpGAYWt6achwqPul99vf-ULOBQn-siHNmjEoCZyUcQe2ipGHF5xuz8W_Lgcm0gbzLeTHIcEz_i9MHH1Q-d6BxUD6SETBktjYQ0-ZeIXDpxJsIW5PD-Iq_WChz_hsGNdOh3BCZK_o9Yd5NE8npOS4UqwyJaDFXjqq0RMcBHl1D2YgR6DLaNSU_kZTHuDA03zCnid10RFQVzVIZAEod-ki4MTuDrGOK78Y9uNoGg"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Active</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Google Sheets</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Automatically send new form submissions to a Google Sheet spreadsheet in real-time.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+                                Last sync: 2m ago
+                            </div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow group relative">
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-[#FFE01B]/10 border border-[#FFE01B]/30">
+<span class="material-symbols-outlined text-[#3C3C3C] text-[32px]">mail</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Active</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Mailchimp</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Sync contacts and add new subscribers to your audience lists instantly.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                Connected as Admin
+                            </div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow group relative">
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-slate-50 dark:bg-slate-700 border border-slate-100 dark:border-slate-600">
+<img alt="Slack Logo" class="size-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIGJ3egabc560A3BcMeQ0iDKb2dyVqKOYVEizXZ9o9R0jTGjvZme1BmUunpaUXiSAPoPOB_c2Zk33jQRjxaYL8vKNT1yCjpyfkJnXLvud12YyITrJW29V1t2meglVlo5dlvmkspssHrcmt7GayaAc6exHovbkDIazomSuDFxiooFisUdyW0asTkau3ak15HzNiWIliutMe5wn10VVXRSbr7qo-PQN4jdf1rijCWImX91FYc-59P-rJTBHytf8zYtc6SeIz3z-TiuU"/>
+</div>
+<div class="flex items-center gap-2">
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Slack</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Receive instant notifications in your Slack channels whenever a form is submitted.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<span class="text-xs text-slate-400">Not connected</span>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-colors">
+                                Connect
+                            </button>
+</div>
+</div>
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 shadow-sm transition-shadow group relative opacity-90">
+<div class="absolute -top-3 -right-3">
+<span class="bg-gradient-to-r from-orange-400 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">PRO</span>
+</div>
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-[#635BFF] border border-[#635BFF]">
+<span class="material-symbols-outlined text-white text-[32px]">payments</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Stripe</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Accept payments, donations, and subscription orders directly through your forms.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-xs text-orange-600 dark:text-orange-400 font-medium">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                                Upgrade required
+                            </div>
+<button class="px-4 py-1.5 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-colors shadow-sm">
+                                Upgrade
+                            </button>
+</div>
+</div>
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow group relative">
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-[#FF7A59]/10 border border-[#FF7A59]/20">
+<span class="material-symbols-outlined text-[#FF7A59] text-[32px]">hub</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">HubSpot</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Create new deals, contacts, or tickets in your HubSpot CRM from form submissions.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<span class="text-xs text-slate-400">Not connected</span>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-colors">
+                                Connect
+                            </button>
+</div>
+</div>
+<div class="flex flex-col p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow group relative">
+<div class="flex justify-between items-start mb-4">
+<div class="size-14 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300 text-[32px]">webhook</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Webhooks</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">Send data to any URL via POST request for custom integrations and workflows.</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<span class="text-xs text-slate-400">Not connected</span>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-colors">
+                                Configure
+                            </button>
+</div>
+</div>
+</div>
+<div class="mt-8 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-lg">
+<h3 class="text-xl font-bold">Need a custom integration?</h3>
+<p class="text-indigo-100">Our Enterprise plan offers custom API development and dedicated support to connect with your proprietary systems.</p>
+</div>
+<button class="whitespace-nowrap px-6 py-2.5 bg-white text-indigo-600 hover:bg-indigo-50 font-semibold rounded-lg transition-colors shadow-lg">
+                            Contact Sales
+                        </button>
+</div>
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

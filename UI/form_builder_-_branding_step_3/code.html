@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Form Branding - NYDev Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1152d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="flex w-72 flex-col justify-between border-r border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 flex-shrink-0 transition-colors duration-300">
+<div class="flex flex-col gap-4 p-4">
+<!-- User Profile -->
+<div class="flex gap-3 items-center mb-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-1 ring-slate-200 dark:ring-slate-700" data-alt="User profile avatar gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiLku3bnFygcLoLQ2X87GvZ0gFo_7q2sRn7kU5kmviecQJ4-QnNNN6YAtcYpgoagMcsxky0D42Rp1z5E2KhoJauGubuOxdTkJ5flGmW6mWbdWwObriJyiwu1Bn3NflaET7NPJJfb3muuHJHO2vzVzajdpLcYeO4b_Gyph16XTQCKl8Tcp6VwUMtccO5oiIqCbgLpx_iMcoRdNbBFGMqyP4Y6N_0BLXcljF5XZogDkZ2aN9zPi5MhsHgFk5xBnKAp5mID_f6wHfVEc");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-medium leading-normal">NYDev Platform</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Organization Workspace</p>
+</div>
+</div>
+<!-- Navigation -->
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<p class="text-sm font-medium leading-normal">Forms</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+<p class="text-sm font-medium leading-normal">Templates</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">extension</span>
+<p class="text-sm font-medium leading-normal">Integrations</p>
+</a>
+</div>
+</div>
+<!-- Bottom Settings -->
+<div class="p-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<div class="w-full max-w-[1400px] mx-auto p-6 md:p-10 flex flex-col gap-8">
+<!-- Header & Progress -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Form Branding</p>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Step 3: Customize the look and feel of your form.</p>
+</div>
+<!-- Progress Bar -->
+<div class="flex flex-col gap-2 w-full max-w-xs">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Wizard Progress</p>
+<p class="text-slate-900 dark:text-white text-xs font-bold leading-normal bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded">Step 3/5</p>
+</div>
+<div class="rounded-full bg-slate-200 dark:bg-slate-700 h-2 overflow-hidden">
+<div class="h-2 rounded-full bg-primary" style="width: 60%;"></div>
+</div>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 shadow-sm">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex gap-4 items-center">
+<div class="hidden sm:flex items-center justify-center size-10 rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 flex-shrink-0">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Free Plan Limitation</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Your form will include NYDev branding until you upgrade your subscription.</p>
+</div>
+</div>
+<button class="flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-5 bg-primary hover:bg-blue-700 text-white text-sm font-medium leading-normal transition-colors">
+<span class="truncate">Upgrade to Pro</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Two Column Layout: Controls vs Preview -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
+<!-- Left Column: Controls -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<!-- Logo Upload Section -->
+<div class="flex flex-col gap-4">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight border-b border-slate-200 dark:border-slate-700 pb-2">Logo Upload</h2>
+<div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800/50 p-8 flex flex-col items-center justify-center text-center gap-3 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group">
+<div class="size-12 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white font-medium text-sm">Click to upload or drag and drop</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">SVG, PNG, JPG (max. 800x400px)</p>
+</div>
+</div>
+<!-- Current Logo Item (Simulated Uploaded State) -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded border border-slate-100 dark:border-slate-700 bg-white p-1 flex items-center justify-center">
+<div class="w-full h-full bg-indigo-600 rounded-sm"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-medium text-slate-900 dark:text-white">logo-worship-ministry.png</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">240 KB • Complete</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Color Picking Section -->
+<div class="flex flex-col gap-5">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight border-b border-slate-200 dark:border-slate-700 pb-2">Theme Colors</h2>
+<!-- Primary Color -->
+<div class="flex flex-col gap-3">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Primary Color</label>
+<div class="flex flex-wrap gap-3">
+<button class="size-8 rounded-full bg-[#1152d4] ring-2 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark ring-[#1152d4]"></button>
+<button class="size-8 rounded-full bg-emerald-600 hover:scale-110 transition-transform"></button>
+<button class="size-8 rounded-full bg-purple-600 hover:scale-110 transition-transform"></button>
+<button class="size-8 rounded-full bg-rose-600 hover:scale-110 transition-transform"></button>
+<button class="size-8 rounded-full bg-slate-900 dark:bg-white hover:scale-110 transition-transform"></button>
+<div class="flex items-center rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 pl-2 overflow-hidden h-8 ml-auto">
+<span class="text-slate-400 text-xs select-none">#</span>
+<input class="w-16 border-none bg-transparent text-xs font-mono focus:ring-0 p-1 text-slate-700 dark:text-slate-200 uppercase" type="text" value="1152D4"/>
+<input class="h-10 w-8 -my-1 cursor-pointer bg-transparent border-0 p-0" type="color" value="#1152d4"/>
+</div>
+</div>
+</div>
+<!-- Background Color -->
+<div class="flex flex-col gap-3">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Page Background</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="group flex items-center justify-center gap-2 rounded-lg border-2 border-primary bg-slate-50 dark:bg-slate-800 py-2 px-3">
+<div class="size-4 rounded-full border border-slate-200 bg-white"></div>
+<span class="text-xs font-medium text-slate-900 dark:text-white">Light</span>
+</button>
+<button class="group flex items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 py-2 px-3 hover:border-slate-300">
+<div class="size-4 rounded-full border border-slate-200 bg-slate-200"></div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Gray</span>
+</button>
+<button class="group flex items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-900 py-2 px-3 hover:border-slate-300">
+<div class="size-4 rounded-full border border-slate-700 bg-slate-800"></div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Dark</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Preview -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Live Preview</h2>
+<div class="flex items-center gap-2">
+<span class="flex size-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Updating in real-time</span>
+</div>
+</div>
+<!-- Preview Canvas -->
+<div class="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50 p-6 md:p-10 overflow-hidden relative shadow-inner">
+<!-- Browser/Device Frame Mock -->
+<div class="w-full h-full bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col overflow-hidden max-w-lg mx-auto border border-slate-200 dark:border-slate-700">
+<!-- Fake Browser Toolbar -->
+<div class="h-8 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 flex items-center px-3 gap-2">
+<div class="flex gap-1.5">
+<div class="size-2.5 rounded-full bg-red-400"></div>
+<div class="size-2.5 rounded-full bg-amber-400"></div>
+<div class="size-2.5 rounded-full bg-green-400"></div>
+</div>
+<div class="mx-auto w-1/2 h-4 bg-slate-200 dark:bg-slate-700 rounded text-[8px] flex items-center justify-center text-slate-400 dark:text-slate-500 font-mono">
+                                        forms.nydev.com/worship-ministry
+                                    </div>
+</div>
+<!-- The Form Content -->
+<div class="flex-1 p-6 md:p-8 overflow-y-auto">
+<!-- Dynamic Logo Area -->
+<div class="flex justify-center mb-6">
+<div class="h-16 w-16 bg-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-3xl">church</span>
+</div>
+</div>
+<div class="text-center mb-8">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Volunteer Registration</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Join the Real Worship Ministry team and make a difference.</p>
+</div>
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Full Name</label>
+<input class="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3" placeholder="e.g. Jane Doe" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Email Address</label>
+<input class="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3" placeholder="jane@example.com" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Area of Interest</label>
+<select class="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3">
+<option>Music &amp; Choir</option>
+<option>Ushers &amp; Greeters</option>
+<option>Technical Support</option>
+</select>
+</div>
+<div class="pt-2">
+<button class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" type="button">
+                                                Submit Application
+                                            </button>
+</div>
+</form>
+<!-- NYDev Branding Footer -->
+<div class="mt-8 border-t border-slate-100 dark:border-slate-700 pt-4 flex justify-center">
+<div class="flex items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
+<span class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Powered by</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">NYDev</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

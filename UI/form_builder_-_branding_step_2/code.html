@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Form Builder - NYDev Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1152d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="flex w-72 flex-col justify-between border-r border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 flex-shrink-0 transition-colors duration-300">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-1 ring-slate-200 dark:ring-slate-700" data-alt="User profile avatar gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiLku3bnFygcLoLQ2X87GvZ0gFo_7q2sRn7kU5kmviecQJ4-QnNNN6YAtcYpgoagMcsxky0D42Rp1z5E2KhoJauGubuOxdTkJ5flGmW6mWbdWwObriJyiwu1Bn3NflaET7NPJJfb3muuHJHO2vzVzajdpLcYeO4b_Gyph16XTQCKl8Tcp6VwUMtccO5oiIqCbgLpx_iMcoRdNbBFGMqyP4Y6N_0BLXcljF5XZogDkZ2aN9zPi5MhsHgFk5xBnKAp5mID_f6wHfVEc");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-medium leading-normal">NYDev Platform</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Organization Workspace</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<p class="text-sm font-medium leading-normal">Forms</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+<p class="text-sm font-medium leading-normal">Templates</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">extension</span>
+<p class="text-sm font-medium leading-normal">Integrations</p>
+</a>
+</div>
+</div>
+<div class="p-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto">
+<div class="w-full max-w-[1600px] mx-auto p-6 md:p-8 flex flex-col gap-6 h-full">
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex min-w-72 flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-2xl font-black leading-tight tracking-[-0.033em]">Add Questions</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Step 2: Build your form structure.</p>
+</div>
+<div class="flex flex-col gap-2 w-full max-w-xs">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Wizard Progress</p>
+<p class="text-slate-900 dark:text-white text-xs font-bold leading-normal bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded">Step 2/5</p>
+</div>
+<div class="rounded-full bg-slate-200 dark:bg-slate-700 h-2 overflow-hidden">
+<div class="h-2 rounded-full bg-primary" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+<div class="lg:col-span-3 flex flex-col gap-6">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight tracking-tight">Field Types</h2>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Basic Fields</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">short_text</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Short Text</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">notes</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Long Text</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">radio_button_checked</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Multiple Choice</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">check_box</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Checkboxes</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+<div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-2 mb-1">Advanced Fields</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">calendar_today</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Date</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm cursor-grab hover:border-primary hover:shadow-md transition-all select-none">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">cloud_upload</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">File Upload</span>
+<span class="ml-auto material-symbols-outlined text-slate-300 text-[18px]">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-9 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight tracking-tight">Form Canvas</h2>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[16px]">visibility</span> Preview
+                             </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary text-xs font-medium text-white hover:bg-blue-700 transition-colors">
+                                Save Progress
+                             </button>
+</div>
+</div>
+<div class="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50 p-6 md:p-10 overflow-y-auto relative shadow-inner">
+<div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(#64748b 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="relative w-full max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col border border-slate-200 dark:border-slate-700 min-h-[600px]">
+<div class="p-8 border-b border-slate-100 dark:border-slate-700 text-center relative group">
+<div class="absolute top-0 left-0 w-1 h-full bg-indigo-600 rounded-l-lg"></div>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</div>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 cursor-text border border-transparent hover:border-slate-200 dark:hover:border-slate-600 rounded px-2 -mx-2">Volunteer Registration</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm cursor-text border border-transparent hover:border-slate-200 dark:hover:border-slate-600 rounded px-2 -mx-2 inline-block">Join the Real Worship Ministry team and make a difference.</p>
+</div>
+<div class="flex-1 p-8 flex flex-col gap-6">
+<div class="group relative p-5 rounded-lg border-2 border-transparent hover:border-slate-200 dark:hover:border-slate-600 focus-within:border-primary bg-white dark:bg-slate-800 transition-all hover:shadow-sm">
+<div class="absolute -left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 cursor-move p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">drag_indicator</span></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Why do you want to join?</label>
+<span class="text-xs text-red-500 font-medium">*</span>
+</div>
+<div class="w-full h-20 rounded-md border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/30 p-2 cursor-not-allowed">
+<span class="text-slate-400 text-sm italic">Long text answer...</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-700 pt-3 opacity-30 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400 font-medium select-none">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/> Required
+                                            </label>
+<button class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">alt_route</span> Conditional Logic
+                                            </button>
+</div>
+<div class="flex gap-1">
+<button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative p-5 rounded-lg border-2 border-primary shadow-sm bg-slate-50 dark:bg-slate-800/80 transition-all">
+<div class="absolute -right-3 top-[-10px] bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">EDITING</div>
+<div class="space-y-3">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Previous Experience</label>
+<div class="space-y-2 pl-1">
+<div class="flex items-center gap-2">
+<div class="size-4 rounded-full border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">None</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-4 rounded-full border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">1-2 Years</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-4 rounded-full border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">3+ Years</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-600 pt-3">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400 font-medium select-none">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/> Required
+                                            </label>
+<button class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">alt_route</span> Conditional Logic
+                                            </button>
+</div>
+<div class="flex gap-1">
+<button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative p-5 rounded-lg border-2 border-transparent hover:border-slate-200 dark:hover:border-slate-600 focus-within:border-primary bg-white dark:bg-slate-800 transition-all hover:shadow-sm">
+<div class="absolute -left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 cursor-move p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">drag_indicator</span></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Availability</label>
+<span class="text-xs text-red-500 font-medium">*</span>
+</div>
+<div class="flex flex-wrap gap-4 pl-1">
+<div class="flex items-center gap-2">
+<div class="size-4 rounded border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Weekdays</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-4 rounded border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Weekends</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-4 rounded border border-slate-300 dark:border-slate-600"></div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Evenings</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-700 pt-3 opacity-30 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400 font-medium select-none">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/> Required
+                                            </label>
+<button class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">alt_route</span> Conditional Logic
+                                            </button>
+</div>
+<div class="flex gap-1">
+<button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg p-6 flex flex-col items-center justify-center text-slate-400 hover:border-primary/50 hover:bg-primary/5 hover:text-primary transition-all cursor-copy">
+<span class="material-symbols-outlined mb-2 text-[28px]">add_circle</span>
+<span class="text-sm font-medium">Drag and drop fields here</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
