@@ -52,27 +52,15 @@ const LandingPage = () => {
                       <div className="flex -space-x-3">
                         <div
                           className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
-                          data-alt="User avatar 1"
-                          style={{
-                            backgroundImage:
-                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuDthEg3Cq64_YhsL8XqVc-mccDHp4kTD-S2fkl6KObAvcOZE_Lg2pPrxBEUrbbziPLcN9g6NU4dNT9ghSZFetRojR3pWeL9XfdcgChnG5UCb0FGpSrkKCmHhtnCCLJ9h10Ek5J8q8ZVev8G7gzQwXlmlTV3fYpc0y6qqeSK639Pp4tP0Uz4ln1c3Ekq8BrbNVsNwViE32V9FUB_TTuBGJiEvC6q55zMHA9x164dxmeTKqr5feHoB7OV-DOs_8fbmvPrnOuGKMr7zpU)"
-                          }}
+                          style={{ backgroundImage: "url(https://lh3.googleusercontent.com/aida-public/AB6AXuDthEg3Cq64_YhsL8XqVc-mccDHp4kTD-S2fkl6KObAvcOZE_Lg2pPrxBEUrbbziPLcN9g6NU4dNT9ghSZFetRojR3pWeL9XfdcgChnG5UCb0FGpSrkKCmHhtnCCLJ9h10Ek5J8q8ZVev8G7gzQwXlmlTV3fYpc0y6qqeSK639Pp4tP0Uz4ln1c3Ekq8BrbNVsNwViE32V9FUB_TTuBGJiEvC6q55zMHA9x164dxmeTKqr5feHoB7OV-DOs_8fbmvPrnOuGKMr7zpU)" }}
                         ></div>
                         <div
                           className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
-                          data-alt="User avatar 2"
-                          style={{
-                            backgroundImage:
-                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuBPu6UryMDZ3pYdSsTDMO485A40Sl4HSbj40Ivd9fcVEjjm2yrg-m1pEEtfb1HSw2z86f9NWi_orQac8JP3DEAJHSV9cvyUm6E-rzWCLnKd8Fa5uNafHbU_7YUb-S4CYJmBvAxGiGtNy0vcaAos86_TGADODQCGiea6rb-mEyVV4HpufLOVoDtEbJzs7VQVlFh3yAxT7RmOFTDlutEdoW3PBZiLMyU7BqYjBEDx3jYgGlu0nYcGOTsiz2RQsvGPGzD0B-wAvHVKi1w)"
-                          }}
+                          style={{ backgroundImage: "url(https://lh3.googleusercontent.com/aida-public/AB6AXuBPu6UryMDZ3pYdSsTDMO485A40Sl4HSbj40Ivd9fcVEjjm2yrg-m1pEEtfb1HSw2z86f9NWi_orQac8JP3DEAJHSV9cvyUm6E-rzWCLnKd8Fa5uNafHbU_7YUb-S4CYJmBvAxGiGtNy0vcaAos86_TGADODQCGiea6rb-mEyVV4HpufLOVoDtEbJzs7VQVlFh3yAxT7RmOFTDlutEdoW3PBZiLMyU7BqYjBEDx3jYgGlu0nYcGOTsiz2RQsvGPGzD0B-wAvHVKi1w)" }}
                         ></div>
                         <div
                           className="w-10 h-10 rounded-full border-2 border-white dark:border-[#101622] bg-gray-200 bg-cover bg-center"
-                          data-alt="User avatar 3"
-                          style={{
-                            backgroundImage:
-                              "url(https://lh3.googleusercontent.com/aida-public/AB6AXuACvqvLfiLP-v3PqEkLndzE3oO7daC3cNTQ1m7WK9uRR6nzOlBj4jltFlhRQUWnldDMcx26gW6ITB3iETqt4tEh0bHWU2CfVN3KG1K_qosrYEDg62eSVgJGrZvuuxHcQ2vSF7Z2k2yo0oELzDlWE2Hc2xnR0vYT90vTr5N8AJKRpCoqfI2RmqAMlOR27SQZjOUCQj6zSfjn9dwfDIALdAki4QH1kKoOpbejFZD2PI-dY6ttpvaUP4Htv3E1yjWL8Ys41MNRyQtBg4A)"
-                          }}
+                          style={{ backgroundImage: "url(https://lh3.googleusercontent.com/aida-public/AB6AXuACvqvLfiLP-v3PqEkLndzE3oO7daC3cNTQ1m7WK9uRR6nzOlBj4jltFlhRQUWnldDMcx26gW6ITB3iETqt4tEh0bHWU2CfVN3KG1K_qosrYEDg62eSVgJGrZvuuxHcQ2vSF7Z2k2yo0oELzDlWE2Hc2xnR0vYT90vTr5N8AJKRpCoqfI2RmqAMlOR27SQZjOUCQj6zSfjn9dwfDIALdAki4QH1kKoOpbejFZD2PI-dY6ttpvaUP4Htv3E1yjWL8Ys41MNRyQtBg4A)" }}
                         ></div>
                       </div>
                       <div className="text-sm text-[#616f89] dark:text-gray-400">
@@ -118,7 +106,6 @@ const LandingPage = () => {
                               <img
                                 alt="QR Code"
                                 className="w-full h-full object-contain"
-                                data-alt="QR Code Example"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9qoArRUoKRN6Uo1SMgbA5YyKajhBn-sK_1AhdKxo4zEFnpYsH0rNU2PegukjKgi4Rcw38GttRY1NxuOQTZ3pv7dZW7Piu2w77Jw_imJGTueii7XCzKgzfXzhX-ksPuH01wMdyOF8Y84Vtz2vsedzBcZ19NQ1t2NhkX3q-rJ2c2tDtSsyHpbeR1y9QI36JEIp4ohVYaSz4X0juCSsV7IwbQLEI4ANRW67MZ2SfsiXuYkuhgpHj6V1retlqs9d0aA0kuI6kkCjzp-4"
                               />
                             </div>
@@ -134,17 +121,19 @@ const LandingPage = () => {
                   </motion.div>
                 </div>
               </div>
-              <motion.div id="how-it-works" className="py-16 md:py-24 border-t border-dashed border-[#e5e7eb] dark:border-[#2a3441]" variants={fadeUp}>
+
+              <motion.div id="features" className="py-16 md:py-24 border-t border-dashed border-[#e5e7eb] dark:border-[#2a3441]" variants={fadeUp}>
                 <div className="flex flex-col gap-4 text-center mb-16">
                   <span className="text-primary font-bold text-sm tracking-wider uppercase">Process</span>
-                  <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.015em] sm:text-4xl">
+                  <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight sm:text-4xl">
                     Simple Steps to Smart Registration
                   </h2>
-                  <p className="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal max-w-[720px] mx-auto">
+                  <p className="text-[#616f89] dark:text-gray-400 text-base font-normal max-w-[720px] mx-auto">
                     Get started in minutes with our intuitive three-step process designed for efficiency and reliability.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                  {/* Step 1 */}
                   <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
                     <div className="w-14 h-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined !text-[32px]">design_services</span>
@@ -156,17 +145,19 @@ const LandingPage = () => {
                       </p>
                     </div>
                   </div>
+                  {/* Step 2 */}
                   <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
                     <div className="w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined !text-[32px]">share</span>
                     </div>
                     <div className="flex flex-col gap-3">
-                      <h3 className="text-[#111318] dark:text-white text-xl font-bold leading-tight">2. Share &amp; Collect</h3>
+                      <h3 className="text-[#111318] dark:text-white text-xl font-bold leading-tight">2. Share & Collect</h3>
                       <p className="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-relaxed">
                         Distribute your form automatically via unique links, email campaigns, or embedded widgets. Watch responses roll in real-time.
                       </p>
                     </div>
                   </div>
+                  {/* Step 3 */}
                   <div className="flex flex-col gap-6 p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#f0f2f4] dark:border-[#2a3441] shadow-sm hover:shadow-md transition-shadow group">
                     <div className="w-14 h-14 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined !text-[32px]">qr_code_scanner</span>
@@ -180,11 +171,12 @@ const LandingPage = () => {
                   </div>
                 </div>
               </motion.div>
+
               <motion.div id="pricing" className="py-10 mb-20" variants={fadeUp}>
                 <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
                   <div className="flex flex-col gap-2">
                     <span className="text-primary font-bold text-sm tracking-wider uppercase">Plans</span>
-                    <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.015em]">Flexible Pricing</h2>
+                    <h2 className="text-[#111318] dark:text-white text-3xl font-black leading-tight">Flexible Pricing</h2>
                   </div>
                   <div className="flex bg-gray-100 dark:bg-[#1a2332] p-1 rounded-lg">
                     <button className="px-4 py-2 text-sm font-bold rounded-md bg-white dark:bg-[#2a3441] shadow-sm text-[#111318] dark:text-white">Monthly</button>
@@ -192,6 +184,7 @@ const LandingPage = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Starter Card */}
                   <div className="flex flex-col p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#e5e7eb] dark:border-[#2a3441]">
                     <h3 className="text-lg font-bold text-[#111318] dark:text-white mb-2">Starter</h3>
                     <div className="flex items-baseline gap-1 mb-6">
@@ -201,17 +194,11 @@ const LandingPage = () => {
                     <p className="text-[#616f89] dark:text-gray-400 text-sm mb-6">Perfect for small meetups and testing the waters.</p>
                     <button className="w-full py-2.5 rounded-lg border border-primary text-primary font-bold text-sm mb-6 hover:bg-primary/5 transition-colors">Get Started Free</button>
                     <ul className="flex flex-col gap-3 text-sm text-[#111318] dark:text-white">
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Up to 50 Registrations
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Basic Form Builder
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Email Support
-                      </li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-lg">check</span>Up to 50 Registrations</li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-lg">check</span>Basic Form Builder</li>
                     </ul>
                   </div>
+                  {/* Pro Card */}
                   <div className="flex flex-col p-6 rounded-2xl bg-[#101622] text-white border border-primary relative overflow-hidden transform md:-translate-y-4 shadow-2xl">
                     <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Most Popular</div>
                     <h3 className="text-lg font-bold mb-2 text-white">Professional</h3>
@@ -222,20 +209,11 @@ const LandingPage = () => {
                     <p className="text-gray-300 text-sm mb-6">For professional event organizers.</p>
                     <button className="w-full py-2.5 rounded-lg bg-primary text-white font-bold text-sm mb-6 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">Start Free Trial</button>
                     <ul className="flex flex-col gap-3 text-sm text-gray-200">
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Unlimited Registrations
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>QR Code Check-in App
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Analytics Dashboard
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-primary text-lg">check_circle</span>Custom Branding
-                      </li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-lg">check_circle</span>Unlimited Registrations</li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-lg">check_circle</span>QR Code Check-in App</li>
                     </ul>
                   </div>
+                  {/* Business Card */}
                   <div className="flex flex-col p-6 rounded-2xl bg-white dark:bg-[#1a2332] border border-[#e5e7eb] dark:border-[#2a3441]">
                     <h3 className="text-lg font-bold text-[#111318] dark:text-white mb-2">Business</h3>
                     <div className="flex items-baseline gap-1 mb-6">
@@ -245,64 +223,12 @@ const LandingPage = () => {
                     <p className="text-[#616f89] dark:text-gray-400 text-sm mb-6">Advanced features for large scale operations.</p>
                     <button className="w-full py-2.5 rounded-lg border border-[#dbdfe6] dark:border-[#384455] text-[#111318] dark:text-white font-bold text-sm mb-6 hover:bg-gray-50 dark:hover:bg-[#253042] transition-colors">Contact Sales</button>
                     <ul className="flex flex-col gap-3 text-sm text-[#111318] dark:text-white">
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>API Access
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>SSO Integration
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>Dedicated Account Manager
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-green-500 text-lg">check</span>SLA Support
-                      </li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-lg">check</span>API Access</li>
+                      <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-lg">check</span>Dedicated Account Manager</li>
                     </ul>
                   </div>
                 </div>
               </motion.div>
-              <footer className="border-t border-[#f0f2f4] dark:border-[#2a3441] pt-12 pb-8">
-                <div className="flex flex-col md:flex-row justify-between gap-8 mb-8">
-                  <div className="flex flex-col gap-4 max-w-sm">
-                    <div className="flex items-center gap-3 text-[#111318] dark:text-white">
-                      <div className="size-6 flex items-center justify-center bg-primary rounded text-white">
-                        <span className="material-symbols-outlined !text-[16px]">qr_code_scanner</span>
-                      </div>
-                      <h3 className="text-lg font-bold">NYDev Form Generator</h3>
-                    </div>
-                    <p className="text-[#616f89] dark:text-gray-400 text-sm">
-                      The smartest way to create forms and manage event entry with secure QR code technology.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
-                    <div className="flex flex-col gap-3">
-                      <h4 className="font-bold text-[#111318] dark:text-white">Product</h4>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#features">Features</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#pricing">Pricing</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="/org/integrations">Integrations</a>
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      <h4 className="font-bold text-[#111318] dark:text-white">Resources</h4>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Documentation</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Blog</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Community</a>
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      <h4 className="font-bold text-[#111318] dark:text-white">Company</h4>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">About</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Contact</a>
-                      <a className="text-[#616f89] dark:text-gray-400 hover:text-primary" href="#">Legal</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#9aa2b1] pt-8 border-t border-[#f0f2f4] dark:border-[#2a3441]">
-                  <p>&copy; 2023 NYDev. All rights reserved.</p>
-                  <div className="flex gap-4">
-                    <a className="hover:text-primary" href="#">Privacy Policy</a>
-                    <a className="hover:text-primary" href="#">Terms of Service</a>
-                  </div>
-                </div>
-              </footer>
             </motion.div>
           </div>
         </div>
