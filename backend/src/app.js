@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import passport from "passport";
-import connectDb from "./src/config/db.js";
-import configurePassport from "./src/config/passport.js";
-import authRoutes from "./src/routes/authRoutes.js";
-import formRoutes from "./src/routes/formRoutes.js";
-import registrationRoutes from "./src/routes/registrationRoutes.js";
-import superAdminRoutes from "./src/routes/superAdminRoutes.js";
+import connectDb from "./config/db.js";
+import configurePassport from "./config/passport.js";
+import authRoutes from "./routes/authRoutes.js";
+import formRoutes from "./routes/formRoutes.js";
+import registrationRoutes from "./routes/registrationRoutes.js";
+import superAdminRoutes from "./routes/superAdminRoutes.js";
 
 dotenv.config();
 
