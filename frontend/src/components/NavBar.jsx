@@ -5,12 +5,12 @@ const NavBar = () => {
   const { theme, toggleTheme } = useTheme();
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] dark:border-b-[#2a3441] bg-white/80 dark:bg-[#101622]/80 backdrop-blur-md px-4 sm:px-10 py-3">
-      <div className="flex items-center gap-4 text-[#111318] dark:text-white">
+      <Link to="/" className="flex items-center gap-4 text-[#111318] dark:text-white">
         <div className="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
           <span className="material-symbols-outlined !text-[20px]">qr_code_scanner</span>
         </div>
         <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">NYDev Form Generator</h2>
-      </div>
+      </Link>
       <div className="hidden md:flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
           <Link className="text-sm font-medium leading-normal hover:text-primary transition-colors" to="#features">
