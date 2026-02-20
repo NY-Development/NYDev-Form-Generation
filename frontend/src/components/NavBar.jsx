@@ -33,9 +33,9 @@ const NavBar = () => {
           type="button"
         >
           {theme === "dark" ? (
-            <span className="material-symbols-outlined">dark_mode</span>
-          ) : (
             <span className="material-symbols-outlined">light_mode</span>
+          ) : (
+            <span className="material-symbols-outlined">dark_mode</span>
           )}
         </button>
       </div>
