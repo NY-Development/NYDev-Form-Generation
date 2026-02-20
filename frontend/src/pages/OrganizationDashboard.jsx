@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { listForms } from "../services/formService";
 import { fadeUp, pageFade, staggerContainer } from "../utils/motionPresets";
+import { useTheme } from "../store/themeStore";
 
 const OrganizationDashboard = () => {
   const [forms, setForms] = useState([]);
@@ -28,26 +29,12 @@ const OrganizationDashboard = () => {
 
   const activeFormsCount = forms.length;
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <motion.div className="bg-background-light dark:bg-background-dark min-h-screen text-[#111318] dark:text-white font-display" {...pageFade}>
       <div className="flex h-screen overflow-hidden">
-        <aside className="w-64 flex-shrink-0 bg-white dark:bg-[#1A202C] border-r border-[#e5e7eb] dark:border-[#2D3748] flex flex-col h-full transition-all duration-300">
-          <div className="p-6">
-            <div className="flex items-center gap-3 mb-8">
-              <div
-                className="bg-center bg-no-repeat bg-cover rounded-full size-10 flex-shrink-0"
-                data-alt="Organization Logo Avatar"
-                style={{
-                  backgroundImage:
-                    "url(https://lh3.googleusercontent.com/aida-public/AB6AXuAfqZd0Fwpqi3dRDw3XkKrVsRZAypBvVJ7ermCNItBrIuWkn4s2KDKgBg7J79Vwf4Y_repdsbpaXcjzttf_3SGdLFK3eUSwNI_6GR84gepH-U0c4lM2xszfLiVVmSxRXnlxr29daJrD045V52rn76RLyvp58ShzdfmJuonndyM-ymawQKGiuY77VwJLrDcnPJn-3tsVxPEYXu-IiYioAu9mETXgu37CWpIcE7jQ3x3jZqLwOqG8PkN7Xlsk59-ZZieiMKTSTEVjlSs)"
-                }}
-              ></div>
-              <div className="flex flex-col overflow-hidden">
-                <h1 className="text-[#111318] dark:text-white text-base font-bold leading-normal truncate">Real Worship Ministry</h1>
-                <p className="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-normal truncate">Basic Plan</p>
-              </div>
-            </div>
-            <nav className="flex flex-col gap-1">
+          <nav>
               <Link className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary group" to="/org/dashboard">
                 <span className="material-symbols-outlined fill">dashboard</span>
                 <p className="text-sm font-medium leading-normal">Dashboard</p>
@@ -82,7 +69,6 @@ const OrganizationDashboard = () => {
               </button>
             </div>
           </div>
-        </aside>
         <main className="flex-1 flex flex-col h-full overflow-hidden relative">
           <header className="h-16 flex items-center justify-between px-6 bg-white dark:bg-[#1A202C] border-b border-[#e5e7eb] dark:border-[#2D3748] flex-shrink-0 z-10">
             <div className="flex items-center gap-4">
@@ -313,7 +299,6 @@ const OrganizationDashboard = () => {
             </footer>
           </motion.div>
         </main>
-      </div>
     </motion.div>
   );
 };

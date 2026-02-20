@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeUp, pageFade, staggerContainer } from "../utils/motionPresets";
+import { useTheme } from "../store/themeStore";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [isCtaLoading, setIsCtaLoading] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleGetStarted = () => {
     setIsCtaLoading(true);
@@ -15,43 +17,6 @@ const LandingPage = () => {
   return (
     <motion.div className="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display" {...pageFade}>
       <div className="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-        <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] dark:border-b-[#2a3441] bg-white/80 dark:bg-[#101622]/80 backdrop-blur-md px-4 sm:px-10 py-3">
-          <div className="flex items-center gap-4 text-[#111318] dark:text-white">
-            <div className="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
-              <span className="material-symbols-outlined !text-[20px]">qr_code_scanner</span>
-            </div>
-            <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">NYDev Form Generator</h2>
-          </div>
-          <div className="hidden md:flex flex-1 justify-end gap-8">
-            <div className="flex items-center gap-9">
-              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#features">
-                Features
-              </a>
-              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#how-it-works">
-                How it Works
-              </a>
-              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#pricing">
-                Pricing
-              </a>
-              <a className="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/auth/google">
-                Login
-              </a>
-            </div>
-            <button
-              className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              disabled={isCtaLoading}
-              onClick={handleGetStarted}
-              type="button"
-            >
-              <span className="truncate">{isCtaLoading ? "Starting..." : "Get Started"}</span>
-            </button>
-          </div>
-          <div className="md:hidden flex items-center">
-            <button className="text-[#111318] dark:text-white">
-              <span className="material-symbols-outlined">menu</span>
-            </button>
-          </div>
-        </header>
         <div className="layout-container flex h-full grow flex-col">
           <div className="flex flex-1 justify-center py-5">
             <motion.div className="layout-content-container flex flex-col max-w-[1200px] flex-1 px-4 sm:px-6 lg:px-8" variants={staggerContainer} initial="initial" animate="animate">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { listOrganizations } from "../services/superAdminService";
 import { fadeUp, pageFade, staggerContainer } from "../utils/motionPresets";
+import { useTheme } from "../store/themeStore";
 
 const SuperAdminDashboard = () => {
   const [organizations, setOrganizations] = useState([]);
@@ -27,28 +28,11 @@ const SuperAdminDashboard = () => {
 
   const orgCount = organizations.length;
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <motion.div className="bg-background-light dark:bg-background-dark font-display text-text-primary-light dark:text-text-primary-dark antialiased" {...pageFade}>
-      <div className="relative flex min-h-screen w-full flex-row overflow-hidden">
-        <nav className="hidden md:flex flex-col w-64 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex-shrink-0 h-screen sticky top-0 overflow-y-auto">
-          <div className="flex flex-col h-full justify-between p-4">
-            <div className="flex flex-col gap-6">
-              <div className="flex gap-3 items-center px-2">
-                <div
-                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-border-light dark:border-border-dark relative"
-                  data-alt="User avatar profile picture"
-                  style={{
-                    backgroundImage:
-                      "url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRThX-h2B7VTyORIpou7kNjv__MFNI5as--KFvyY5YCiO_5mGZOMyR4_AgaYn63ff0M4ye0A7Q6yPPL5R-Lw1wUVeZu8AIh504dNfkAydjr69rOycgDfvbvcLcJEnIAZbDKPBvwhw8RYYGw-fePQSywIgmceDyoazjIvU4gGDsS_sc96JGmd-P1QRKTu9Pq5Bfs0_wwy_FkNQboB5L6_VkaqXaUAiQfgbc7pFJU5j6ZieDdWvHj9OFggE0T7jllMSjRiql5goJXWo)"
-                  }}
-                >
-                  <div className="absolute bottom-0 right-0 size-2.5 bg-green-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></div>
-                </div>
-                <div className="flex flex-col">
-                  <h1 className="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">NYDev Admin</h1>
-                  <p className="text-text-secondary-light dark:text-text-secondary-dark text-xs font-medium">Super User</p>
-                </div>
-              </div>
+            <div className="relative flex min-h-screen w-full flex-row overflow-hidden">
               <div className="flex flex-col gap-1">
                 <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors" href="#">
                   <span className="material-symbols-outlined text-[20px]">dashboard</span>
@@ -82,8 +66,6 @@ const SuperAdminDashboard = () => {
                 <span className="material-symbols-outlined text-[16px] cursor-pointer hover:text-primary">logout</span>
               </div>
             </div>
-          </div>
-        </nav>
         <main className="flex-1 flex flex-col h-screen overflow-hidden">
           <header className="h-16 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex-shrink-0 z-10">
             <div className="flex items-center gap-4">
@@ -270,7 +252,6 @@ const SuperAdminDashboard = () => {
             </motion.div>
           </motion.div>
         </main>
-      </div>
     </motion.div>
   );
 };
