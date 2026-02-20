@@ -3,11 +3,11 @@
   "name": "nydev-api",
   "builds": [
     {
-      "src": "src/app.js", 
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "src/app.js" }
+    { "source": "/(.*)", "destination": "server.js" }
   ]
 }
