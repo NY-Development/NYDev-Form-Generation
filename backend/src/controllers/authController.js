@@ -17,5 +17,7 @@ export const googleCallback = (req, res) => {
     { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
   );
 
-  res.json({ user, token });
+  // Redirect to frontend with token
+  const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+  res.redirect(`${frontendUrl}/google-auth-success?token=${token}`);
 };

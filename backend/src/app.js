@@ -14,26 +14,56 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Connect to Database immediately for Serverless environments
-connectDb().catch((err) => console.error("Initial DB connection failed:", err));
+/**
+ * ================================
+ * DATABASE CONNECTION (SERVERLESS SAFE)
+ * ================================
+ * Prevents multiple connections in Vercel
+ */
 
-const corsOrigins = (process.env.CORS_ORIGIN || "").split(",").map((origin) => origin.trim()).filter(Boolean);
+let isConnected = false;
+
+const initDb = async () => {
+  if (!isConnected) {
+    try {
+      await connectDb();
+      isConnected = true;
+      console.log("Database Connected ✅");
+    } catch (err) {
+      console.error("Initial DB connection failed:", err);
+    }
+  }
+};
+
+initDb();
+
+/**
+ * ================================
+ * CORS CONFIGURATION
+ * ================================
+ */
 
 app.use(
   cors({
-    origin: corsOrigins.length ? corsOrigins : true,
+    origin: [
+      "http://localhost:5173",
+      "https://bednotify.vercel.app"
+    ],
     credentials: true
   })
 );
+
 app.use(express.json({ limit: "2mb" }));
 app.use(passport.initialize());
 
 configurePassport(passport);
 
 /**
- * 1. BEAUTIFIED ROOT ROUTE
- * This resolves the 404 on the base URL and provides a clean status UI
+ * ================================
+ * ROOT ROUTE
+ * ================================
  */
+
 app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -68,7 +98,7 @@ app.get("/", (req, res) => {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                     <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-700/50">
                         <p class="text-xs font-bold text-slate-500 uppercase mb-1">Environment</p>
-                        <p class="text-lg font-mono text-indigo-300">${process.env.NODE_ENV || 'production'}</p>
+                        <p class="text-lg font-mono text-indigo-300">${process.env.NODE_ENV || "production"}</p>
                     </div>
                     <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-700/50">
                         <p class="text-xs font-bold text-slate-500 uppercase mb-1">Active Routes</p>
@@ -102,31 +132,60 @@ app.get("/", (req, res) => {
   `);
 });
 
+/**
+ * ================================
+ * HEALTH ROUTE
+ * ================================
+ */
+
 app.get("/health", (req, res) => {
-  res.json({ 
-    status: "ok", 
+  res.json({
+    status: "ok",
     timestamp: new Date().toISOString(),
-    uptime: process.uptime() 
+    uptime: process.uptime()
   });
 });
+
+/**
+ * ================================
+ * API ROUTES
+ * ================================
+ */
 
 app.use("/api/auth", authRoutes);
 app.use("/api/forms", formRoutes);
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/superadmin", superAdminRoutes);
 
-// Custom 404 for API routes
+/**
+ * ================================
+ * 404 HANDLER
+ * ================================
+ */
+
 app.use((req, res) => {
   res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
 
-// Error handling middleware
+/**
+ * ================================
+ * ERROR HANDLER
+ * ================================
+ */
+
 app.use((err, req, res, next) => {
   const status = err.status || 500;
-  res.status(status).json({ message: err.message || "Server error" });
+  res.status(status).json({
+    message: err.message || "Server error"
+  });
 });
 
-// For local development
+/**
+ * ================================
+ * LOCAL DEVELOPMENT SERVER
+ * ================================
+ */
+
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log(`NYDev API running on port ${port}`);
