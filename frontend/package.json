@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
     "axios": "^1.13.4",
     "chart.js": "^4.4.4",
     "framer-motion": "^11.5.4",
     "lucide-react": "^0.563.0",
     "nanoid": "^5.0.7",
+    "postgres": "^3.4.8",
     "prop-types": "^15.8.1",
     "qrcode.react": "^4.1.0",
     "react": "^19.2.0",

@@ -14,7 +14,7 @@ const GoogleSignInPage = () => {
     setErrorMessage("");
     try {
       await loginWithGoogle();
-      navigate("/org/dashboard");
+      // Supabase OAuth will handle redirect, no need to navigate here
     } catch (error) {
       setErrorMessage("Unable to sign in. Please try again.");
     } finally {

@@ -41,7 +41,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-[60] flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-[#0f172a]/70 backdrop-blur-md px-6 py-3">
+      <nav className="sticky top-0 z-[60] flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-[#0f172a]/95 backdrop-blur-md px-6 py-3">
         <Link to="/" className="flex items-center gap-3">
           <div className="size-8 flex items-center justify-center bg-indigo-600 rounded-lg text-white shadow-md">
             <span className="material-symbols-outlined !text-[18px]">qr_code_scanner</span>

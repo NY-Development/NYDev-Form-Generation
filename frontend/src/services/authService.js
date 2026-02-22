@@ -1,22 +1,19 @@
+import { supabase } from "./supabaseClient";
 import useAuthStore from "../store/authStore";
 
 export const loginWithGoogle = async () => {
-  // Redirect to backend Google OAuth endpoint
-  window.location.href = "/api/auth/google";
-};
-
-export const handleGoogleCallback = async () => {
-  // Called after redirect from Google
-  const res = await fetch("/api/auth/google/callback", {
-    credentials: "include"
-  });
-  const data = await res.json();
-  const { user, token } = data;
-  useAuthStore.getState().setUser(user, token);
-  return { user, token };
+  const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+  if (error) throw error;
 };
 
 export const logout = async () => {
+  await supabase.auth.signOut();
   useAuthStore.getState().logout();
   return { success: true };
+};
+
+export const getSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  return data.session;
 };
