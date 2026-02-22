@@ -47,7 +47,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://bednotify.vercel.app"
+      "https://nydev-form-generation.vercel.app"
     ],
     credentials: true
   })
