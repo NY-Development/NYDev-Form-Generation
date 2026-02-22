@@ -52,14 +52,14 @@ const NavBar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} className={`text-sm font-medium transition-colors ${location.pathname === l.to ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}`}>
+            <Link key={l.to} to={l.to} className={`text-sm font-medium transition-colors ${location.pathname === l.to && !location.hash ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}`}>
               {l.name}
             </Link>
           ))}
           
           <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
           
-          <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <button onClick={toggleTheme} className={`p-2 rounded-full ${theme === 'dark' ? 'text-white' : 'text-black'} hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors`}>
             <span className="material-symbols-outlined !text-[20px]">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
           </button>
 
@@ -125,7 +125,7 @@ const NavBar = () => {
                         to={link.to}
                         onClick={closeMenu}
                         className={`flex items-center gap-4 p-4 rounded-2xl transition-all ${
-                          location.pathname === link.to 
+                          (location.pathname + location.hash) === link.to 
                           ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30" 
                           : "hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
                         }`}

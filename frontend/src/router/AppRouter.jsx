@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import NavBar from "../components/NavBar.jsx"; // Ensure correct path
 import LandingPage from "../pages/LandingPage.jsx";
 import GoogleSignInPage from "../pages/GoogleSignInPage.jsx";
+import GoogleAuthSuccess from "../pages/GoogleAuthSuccess.jsx";
 import OrganizationDashboard from "../pages/OrganizationDashboard.jsx";
 import OrgForms from "../pages/OrgForms.jsx";
 import OrgBilling from "../pages/OrgBilling.jsx";
@@ -31,6 +32,7 @@ const AppRouter = () => {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><LandingPage /></PageTransition>} />
           <Route path="/auth/google" element={<PageTransition><GoogleSignInPage /></PageTransition>} />
+          <Route path="/google-auth-success" element={<GoogleAuthSuccess />} />
           
           {/* Org Admin Routes */}
           <Route path="/org/dashboard" element={<ProtectedRoute roles={[ROLE_ORG_ADMIN]}><PageTransition><OrganizationDashboard /></PageTransition></ProtectedRoute>} />

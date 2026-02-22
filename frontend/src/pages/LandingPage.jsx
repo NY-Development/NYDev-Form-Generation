@@ -1,13 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeUp, pageFade, staggerContainer } from "../utils/motionPresets";
 import { useTheme } from "../store/themeStore";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isCtaLoading, setIsCtaLoading] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  // Scroll to hash logic
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
 
   const handleGetStarted = () => {
     setIsCtaLoading(true);
