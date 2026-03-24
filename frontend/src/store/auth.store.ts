@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User } from '../types';
+import type { User, Organization } from '../types';
 
 interface AuthState {
+  organization: Organization | null;
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
@@ -14,6 +15,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
+      organization: null,
       user: null,
       token: null,
       isAuthenticated: false,
