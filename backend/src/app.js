@@ -42,7 +42,7 @@ const allowedOrigins = [
   "http://192.168.1.12:8081", // local mobile dev on physical device
   "http://192.168.1.12:5000", // local mobile app on physical device
   "http://192.168.1.12", // Allow from your machine IP
-  "https://ny-dev-form-generation.vercel.app", //deployed url
+  "https://nydev-form-generation.vercel.app", //deployed url
 ];
 
 app.use(
