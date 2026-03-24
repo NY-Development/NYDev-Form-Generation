@@ -8,6 +8,7 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const env = require('./config/env');
+const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
 const AppError = require('./utils/AppError');
 
@@ -25,8 +26,9 @@ const brandingRoutes = require('./routes/brandingRoutes');
 
 const app = express();
 
-const connectDB = require('./config/database');
-connectDB(env.MONGO_URI); 
+// ─── Database Connection ─────────────────────────────────────
+// In Serverless, we connect at the top level
+connectDB(env.MONGO_URI);
 
 // ─── Security Middleware ─────────────────────────────────────
 app.use(helmet());
@@ -43,8 +45,8 @@ app.use(cors({
 
 // ─── Rate Limiting ───────────────────────────────────────────
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: {
     success: false,
     message: 'Too many requests from this IP, please try again after 15 minutes.',
@@ -54,7 +56,6 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-// More aggressive rate limit for auth endpoints
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,
