@@ -54,6 +54,54 @@ const limiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
+// ─── Welcome Page (Root Route) ───────────────────────────────
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NYDev API | Status: Online</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com" rel="stylesheet">
+        <style>
+            body { font-family: 'Inter', sans-serif; }
+            .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        </style>
+    </head>
+    <body class="gradient-bg min-h-screen flex items-center justify-center text-slate-200">
+        <div class="max-w-md w-full p-8 bg-slate-800/50 rounded-2xl border border-slate-700 shadow-2xl backdrop-blur-sm">
+            <div class="flex items-center justify-center mb-6">
+                <div class="h-3 w-3 bg-emerald-500 rounded-full animate-pulse mr-2"></div>
+                <span class="text-emerald-400 font-semibold tracking-wider text-sm uppercase">Systems Operational</span>
+            </div>
+            
+            <h1 class="text-3xl font-extrabold text-white text-center mb-2">NYDev Form Generator</h1>
+            <p class="text-slate-400 text-center mb-8">Multi-tenant SaaS Backend API v1.0.0</p>
+            
+            <div class="space-y-4">
+                <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50">
+                    <p class="text-xs text-slate-500 uppercase font-bold mb-1">Health Check Endpoint</p>
+                    <code class="text-blue-400 text-sm">GET /api/health</code>
+                </div>
+                <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50">
+                    <p class="text-xs text-slate-500 uppercase font-bold mb-1">Environment</p>
+                    <code class="text-amber-400 text-sm">${env.NODE_ENV}</code>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-700/50 text-center">
+                <a href="${env.CLIENT_URL}" class="text-sm text-slate-400 hover:text-white transition-colors">
+                    &larr; Back to Main Application
+                </a>
+            </div>
+        </div>
+    </body>
+    </html>
+  `);
+});
+
 app.use('/api/', limiter);
 
 const authLimiter = rateLimit({
