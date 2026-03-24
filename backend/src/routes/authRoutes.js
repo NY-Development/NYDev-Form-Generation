@@ -1,24 +1,61 @@
-import { Router } from "express";
-import passport from "passport";
-import { authRequired } from "../middleware/auth.js";
-import { getMe, googleCallback } from "../controllers/authController.js";
+const express = require('express');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+const authController = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
 
-const router = Router();
+const router = express.Router();
 
-router.get("/me", authRequired, getMe);
-
-router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-    session: false
-  })
+// @route   POST /api/auth/register
+router.post(
+  '/register',
+  [
+    body('firstName').trim().notEmpty().withMessage('First name is required'),
+    body('lastName').trim().notEmpty().withMessage('Last name is required'),
+    body('email').isEmail().normalizeEmail().withMessage('Please provide a valid email'),
+    body('password')
+      .isLength({ min: 8 })
+      .withMessage('Password must be at least 8 characters')
+      .matches(/\d/)
+      .withMessage('Password must contain at least one number'),
+    body('organizationName').optional().trim(),
+  ],
+  validate,
+  authController.register
 );
 
-router.get(
-  "/google/callback",
-  passport.authenticate("google", { session: false, failureRedirect: "/" }),
-  googleCallback
+// @route   POST /api/auth/login
+router.post(
+  '/login',
+  [
+    body('email').isEmail().normalizeEmail().withMessage('Please provide a valid email'),
+    body('password').notEmpty().withMessage('Password is required'),
+  ],
+  validate,
+  authController.login
 );
 
-export default router;
+// @route   GET /api/auth/me
+router.get('/me', protect, authController.getMe);
+
+// @route   PUT /api/auth/password
+router.put(
+  '/password',
+  protect,
+  [
+    body('currentPassword').notEmpty().withMessage('Current password is required'),
+    body('newPassword')
+      .isLength({ min: 8 })
+      .withMessage('New password must be at least 8 characters'),
+  ],
+  validate,
+  authController.updatePassword
+);
+
+// @route   PUT /api/auth/profile
+router.put('/profile', protect, authController.updateProfile);
+
+// @route   POST /api/auth/logout
+router.post('/logout', protect, authController.logout);
+
+module.exports = router;
