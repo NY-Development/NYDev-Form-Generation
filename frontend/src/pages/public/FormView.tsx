@@ -39,6 +39,7 @@ export const FormView = () => {
     // Simulate submission delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
     navigate(`/f/${id}/success`);
+    console.log(data)
   };
 
   return (
