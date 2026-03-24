@@ -36,12 +36,29 @@ app.use(mongoSanitize());
 app.use(hpp());
 
 // ─── CORS ────────────────────────────────────────────────────
-app.use(cors({
-  origin: env.CLIENT_URL,
-  credentials: true,
+const allowedOrigins = [
+  "http://localhost:5173", // local dev
+  "http://localhost:8081", // local mobile dev
+  "http://192.168.1.12:8081", // local mobile dev on physical device
+  "http://192.168.1.12:5000", // local mobile app on physical device
+  "http://192.168.1.12", // Allow from your machine IP
+  "https://ny-dev-form-generation.vercel.app", //deployed url
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+  }),
+);
 
 // ─── Rate Limiting ───────────────────────────────────────────
 const limiter = rateLimit({
