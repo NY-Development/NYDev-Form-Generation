@@ -1,19 +1,44 @@
-import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Calendar, ArrowRight, ShieldCheck, Terminal } from 'lucide-react';
+
+const guestRegistrationSchema = z.object({
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  email: z.string().min(1, 'Email is required').email('Invalid email address'),
+  phone: z.string().optional(),
+  source: z.string().optional(),
+  accessibility: z.string().optional(),
+});
+
+type GuestRegistrationData = z.infer<typeof guestRegistrationSchema>;
 
 export const FormView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<GuestRegistrationData>({
+    resolver: zodResolver(guestRegistrationSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      source: 'Social Media',
+      accessibility: '',
+    },
+  });
+
+  const onSubmit = async (data: GuestRegistrationData) => {
     // Simulate submission delay
-    setTimeout(() => {
-      navigate(`/f/${id}/success`);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    navigate(`/f/${id}/success`);
   };
 
   return (
@@ -68,7 +93,7 @@ export const FormView = () => {
           </div>
 
           {/* Registration Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-8 rounded-xl border border-border bg-card p-8 shadow-lg">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 rounded-xl border border-border bg-card p-8 shadow-lg">
             <div className="mb-2 border-b border-border pb-2">
               <h3 className="mb-1 text-xl font-bold text-foreground">Guest Registration</h3>
               <p className="text-sm text-muted-foreground">Please fill in your details below to secure your spot.</p>
@@ -76,71 +101,82 @@ export const FormView = () => {
 
             {/* Personal Info */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">
                   First Name <span className="text-destructive">*</span>
-                </span>
+                </label>
                 <input
                   type="text"
-                  required
+                  {...register('firstName')}
                   placeholder="Jane"
                   className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
                 />
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">
+                {errors.firstName && <span className="text-xs text-destructive">{errors.firstName.message}</span>}
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">
                   Last Name <span className="text-destructive">*</span>
-                </span>
+                </label>
                 <input
                   type="text"
-                  required
+                  {...register('lastName')}
                   placeholder="Doe"
                   className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
                 />
-              </label>
+                {errors.lastName && <span className="text-xs text-destructive">{errors.lastName.message}</span>}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">
                   Email Address <span className="text-destructive">*</span>
-                </span>
+                </label>
                 <input
                   type="email"
-                  required
+                  {...register('email')}
                   placeholder="jane.doe@example.com"
                   className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
                 />
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">Phone Number</span>
+                {errors.email && <span className="text-xs text-destructive">{errors.email.message}</span>}
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">Phone Number</label>
                 <input
                   type="tel"
+                  {...register('phone')}
                   placeholder="(555) 123-4567"
                   className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
                 />
-              </label>
+                {errors.phone && <span className="text-xs text-destructive">{errors.phone.message}</span>}
+              </div>
             </div>
 
             {/* Custom Questions */}
             <div className="flex flex-col gap-6 border-t border-border pt-4">
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">How did you hear about this event?</span>
-                <select className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary">
-                  <option>Social Media</option>
-                  <option>Friend / Family</option>
-                  <option>Church Announcement</option>
-                  <option>Website</option>
-                  <option>Other</option>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">How did you hear about this event?</label>
+                <select 
+                  {...register('source')}
+                  className="h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
+                >
+                  <option value="Social Media">Social Media</option>
+                  <option value="Friend / Family">Friend / Family</option>
+                  <option value="Church Announcement">Church Announcement</option>
+                  <option value="Website">Website</option>
+                  <option value="Other">Other</option>
                 </select>
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">Do you have any accessibility requirements?</span>
+                {errors.source && <span className="text-xs text-destructive">{errors.source.message}</span>}
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-foreground">Do you have any accessibility requirements?</label>
                 <textarea
+                  {...register('accessibility')}
                   placeholder="Please let us know if you need wheelchair access, etc."
                   className="min-h-[100px] w-full rounded-lg border border-border bg-background p-4 text-foreground shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
                 ></textarea>
-              </label>
+                {errors.accessibility && <span className="text-xs text-destructive">{errors.accessibility.message}</span>}
+              </div>
             </div>
 
             {/* Footer Actions */}

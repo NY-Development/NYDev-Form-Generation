@@ -1,0 +1,30 @@
+﻿
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\components\ui\button.tsx
+  67:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\context\AuthContext.tsx
+  15:14  error  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file  react-refresh/only-export-components
+  34:23  error  Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+  39:23  error  Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\pages\auth\Login.tsx
+  36:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\pages\public\FormView.tsx
+  38:27  error  'data' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\router\index.tsx
+  17:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\schemas\submission.schema.ts
+  4:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\yamla\Desktop\NYDev\nyProjects\NYDev-Form-Generator\frontend\src\store\form.store.ts
+   7:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 13 problems (13 errors, 0 warnings)
+

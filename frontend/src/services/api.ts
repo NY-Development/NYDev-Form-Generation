@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuthStore } from '../store/auth.store';
 
 // Create an Axios instance
 const api = axios.create({
@@ -12,7 +13,7 @@ const api = axios.create({
 // Request interceptor to inject token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = useAuthStore.getState().token;
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -31,7 +32,7 @@ api.interceptors.response.use(
   (error) => {
     // Check if it's an auth error (401) and clear token
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('token');
+      useAuthStore.getState().logout();
       // Redirect to login if not already there, could use a global event or window.location
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
