@@ -1,5 +1,4 @@
 const env = require('./config/env');
-const connectDB = require('./config/database');
 const app = require('./app');
 
 // Handle uncaught exceptions
@@ -11,7 +10,6 @@ process.on('uncaughtException', (err) => {
 
 // Connect to database and start server
 const startServer = async () => {
-  await connectDB(env.MONGO_URI);
 
   const server = app.listen(env.PORT, () => {
     console.log(`

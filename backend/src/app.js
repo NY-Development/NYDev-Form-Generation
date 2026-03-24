@@ -25,6 +25,9 @@ const brandingRoutes = require('./routes/brandingRoutes');
 
 const app = express();
 
+const connectDB = require('./config/database');
+connectDB(env.MONGO_URI); 
+
 // ─── Security Middleware ─────────────────────────────────────
 app.use(helmet());
 app.use(mongoSanitize());
