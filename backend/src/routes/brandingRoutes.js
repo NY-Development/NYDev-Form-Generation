@@ -1,6 +1,7 @@
 const express = require('express');
 const brandingController = require('../controllers/brandingController');
 const { protect, authorize, orgAccess } = require('../middleware/auth');
+const { upload } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.put(
   '/:orgId/branding',
   orgAccess,
   authorize('owner', 'superadmin'),
+  upload.fields([{ name: 'logo', maxCount: 1 }, { name: 'favicon', maxCount: 1 }]),
   brandingController.updateBranding
 );
 
