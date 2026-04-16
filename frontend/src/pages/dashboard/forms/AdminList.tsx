@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search, Filter, Download, QrCode, MoreVertical, CheckCircle2, XCircle, Eye } from 'lucide-react';
+import { Search, Download, QrCode, MoreVertical, CheckCircle2, XCircle, Eye } from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
 import { submissionService } from '../../../services/submission.service';
 import { StatusBadge } from '../../../components/common/StatusBadge';

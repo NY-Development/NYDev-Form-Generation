@@ -348,7 +348,7 @@ export const CreateWizard = () => {
                   {['#1152d4', '#059669', '#7c3aed', '#e11d48', '#ea580c'].map((c) => (
                     <button key={c} onClick={() => setFormData({ ...formData, primaryColor: c })}
                       className={`size-8 rounded-full transition-transform hover:scale-110 ${formData.primaryColor === c ? 'ring-2 ring-offset-2 ring-offset-background' : ''}`}
-                      style={{ backgroundColor: c, ringColor: c }}
+                      style={{ backgroundColor: c}}
                     />
                   ))}
                   <input type="color" className="h-8 w-12 cursor-pointer rounded border border-border bg-background p-0"

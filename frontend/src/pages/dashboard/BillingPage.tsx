@@ -140,7 +140,7 @@ export const BillingPage = () => {
 
               <button
                 onClick={() => handleUpgrade(plan.id)}
-                disabled={isCurrent || !!upgrading}
+                disabled={isCurrent || !!upgrading || loading}
                 className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition-colors ${
                   isCurrent
                     ? 'cursor-default border border-border bg-muted text-muted-foreground'

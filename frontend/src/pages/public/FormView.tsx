@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, ArrowRight, ShieldCheck, Terminal, AlertCircle } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Terminal, AlertCircle } from 'lucide-react';
 import { publicService } from '../../services/public.service';
 import { DynamicFormRenderer } from '../../components/forms/DynamicFormRenderer';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';

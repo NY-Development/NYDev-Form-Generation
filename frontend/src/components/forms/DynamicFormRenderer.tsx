@@ -12,7 +12,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
 
   const renderField = (field: FormField) => {
     const value = values[field.fieldId] ?? '';
-    const error = errors?.[field.fieldId];
+    // const error = errors?.[field.fieldId];
     const baseInputClass = 'h-11 w-full rounded-lg border border-border bg-background px-4 text-foreground shadow-sm transition-colors focus:border-primary focus:ring-1 focus:ring-primary outline-none';
 
     switch (field.type) {

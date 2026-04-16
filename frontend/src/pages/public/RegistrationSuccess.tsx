@@ -1,5 +1,5 @@
 import { useParams, useLocation, Link } from 'react-router-dom';
-import { CheckCircle2, Calendar, Clock, MapPin, Download, Terminal } from 'lucide-react';
+import { CheckCircle2, Download, Terminal } from 'lucide-react';
 
 export const RegistrationSuccess = () => {
   const { slug } = useParams<{ slug: string }>();
