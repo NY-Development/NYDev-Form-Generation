@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { AppRouter } from '@/router';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { TooltipProvider } from '../src/components/ui/tooltip';
 import { useUiStore } from '@/store/ui.store';
 import { useAuthStore } from '@/store/auth.store';
 import { authService } from '@/services/auth.service';
 import { organizationService } from '@/services/organization.service';
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from '../src/components/ui/sonner';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
 function App() {
