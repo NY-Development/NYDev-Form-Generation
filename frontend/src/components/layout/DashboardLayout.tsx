@@ -12,7 +12,11 @@ import {
   HelpCircle,
   LogOut,
   Gem,
+  Sun,
+  Moon,
+  Menu,
 } from 'lucide-react';
+import { useUiStore } from '../../store/ui.store';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -21,6 +25,7 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayoutProps) => {
   const { user, organization, logout } = useAuth();
+  const { theme, toggleTheme, sidebarOpen, toggleSidebar } = useUiStore();
 
   const navItems = [
     { label: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/dashboard' },
@@ -32,9 +37,17 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
 
   return (
     <div className="flex h-screen overflow-hidden bg-background text-foreground font-display">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity" 
+          onClick={toggleSidebar}
+        />
+      )}
+      
       {/* Sidebar */}
-      <aside className="border-r border-border bg-card flex w-64 shrink-0 flex-col h-full transition-all duration-300">
-        <div className="p-6">
+      <aside className={`fixed inset-y-0 left-0 z-50 md:static border-border bg-card flex shrink-0 flex-col h-full transition-all duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0 w-64 border-r' : '-translate-x-full md:translate-x-0 w-64 md:w-0 border-r-0'} overflow-hidden shadow-xl md:shadow-none`}>
+        <div className="p-6 min-w-64">
           {/* Org Info */}
           <div className="mb-8 flex items-center gap-3">
             <div
@@ -93,6 +106,9 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
         {/* Header */}
         <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-border bg-card px-6">
           <div className="flex items-center gap-4">
+            <button onClick={toggleSidebar} className="p-1 text-muted-foreground transition-colors hover:text-foreground">
+              <Menu size={24} />
+            </button>
             <h2 className="text-lg font-bold text-foreground">{title}</h2>
           </div>
           <div className="flex items-center gap-4">
@@ -109,12 +125,15 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
             </div>
             {/* Actions */}
             <div className="flex items-center gap-2">
+              <button onClick={toggleTheme} className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
               <button className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
-                <Bell size={24} />
+                <Bell size={20} />
                 <span className="absolute right-2 top-2 size-2 rounded-full border-2 border-card bg-red-500"></span>
               </button>
               <button className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
-                <HelpCircle size={24} />
+                <HelpCircle size={20} />
               </button>
               <div className="mx-1 h-8 w-px bg-border"></div>
               

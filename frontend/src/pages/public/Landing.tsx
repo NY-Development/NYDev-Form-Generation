@@ -1,45 +1,21 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { QrCode, Menu, PlayCircle, Edit3, Palette, Settings, CheckCircle2, Check, Share2 } from 'lucide-react';
+import { QrCode, PlayCircle, Edit3, Palette, Settings, CheckCircle2, Check, Share2, Users, FileText, ShieldCheck, Building2 } from 'lucide-react';
+import { Navbar } from '../../components/layout/Navbar';
+import { publicService } from '../../services/public.service';
 
 const Landing = () => {
+  const [stats, setStats] = useState({ totalOrganizations: 0, totalForms: 0, totalSubmissions: 0, totalUsers: 0 });
+
+  useEffect(() => {
+    publicService.getPublicStats()
+      .then((res) => setStats(res.data.stats || res.data))
+      .catch(() => {}); // Graceful fallback — stats stay at 0
+  }, []);
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-border bg-background/80 px-4 py-3 backdrop-blur-md sm:px-10">
-        <div className="flex items-center gap-4 text-foreground">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <QrCode className="h-5 w-5" />
-          </div>
-          <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">NYDev Form Generator</h2>
-        </div>
-        <div className="hidden flex-1 justify-end gap-8 md:flex">
-          <div className="flex items-center gap-9">
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#features">
-              Features
-            </a>
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#how-it-works">
-              How it Works
-            </a>
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#pricing">
-              Pricing
-            </a>
-            <Link className="text-sm font-medium leading-normal transition-colors hover:text-primary" to="/login">
-              Login
-            </Link>
-          </div>
-          <Link
-            to="/login"
-            className="flex h-9 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-[0.015em] text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            <span className="truncate">Get Started</span>
-          </Link>
-        </div>
-        <div className="flex items-center md:hidden">
-          <button className="text-foreground">
-            <Menu className="h-6 w-6" />
-          </button>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="flex h-full grow flex-col">
         <div className="flex flex-1 justify-center py-5">
@@ -100,7 +76,7 @@ const Landing = () => {
                       ></div>
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      <span className="font-bold text-foreground">2,000+</span> event organizers trust us
+                      <span className="font-bold text-foreground">{stats.totalOrganizations > 0 ? stats.totalOrganizations.toLocaleString() + '+' : '2,000+'}</span> event organizers trust us
                     </div>
                   </div>
                 </div>
@@ -212,6 +188,49 @@ const Landing = () => {
                       for secure, instant entry.
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Platform Stats */}
+            <div className="border-t border-dashed border-border py-16 md:py-24">
+              <div className="mb-16 flex flex-col gap-4 text-center">
+                <span className="text-sm font-bold tracking-wider text-primary uppercase">Trusted By Many</span>
+                <h2 className="text-3xl font-black leading-tight tracking-[-0.015em] text-foreground sm:text-4xl">
+                  Platform at a Glance
+                </h2>
+                <p className="mx-auto max-w-[720px] text-base font-normal leading-normal text-muted-foreground">
+                  Real-time metrics from our growing community of event organizers.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+                <div className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-900/20">
+                    <Building2 className="h-6 w-6" />
+                  </div>
+                  <span className="text-3xl font-black text-foreground">{stats.totalOrganizations.toLocaleString()}</span>
+                  <span className="text-sm font-medium text-muted-foreground">Organizations</span>
+                </div>
+                <div className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-transform duration-300 group-hover:scale-110 dark:bg-purple-900/20">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <span className="text-3xl font-black text-foreground">{stats.totalForms.toLocaleString()}</span>
+                  <span className="text-sm font-medium text-muted-foreground">Published Forms</span>
+                </div>
+                <div className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-green-600 transition-transform duration-300 group-hover:scale-110 dark:bg-green-900/20">
+                    <ShieldCheck className="h-6 w-6" />
+                  </div>
+                  <span className="text-3xl font-black text-foreground">{stats.totalSubmissions.toLocaleString()}</span>
+                  <span className="text-sm font-medium text-muted-foreground">Registrations</span>
+                </div>
+                <div className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-900/20">
+                    <Users className="h-6 w-6" />
+                  </div>
+                  <span className="text-3xl font-black text-foreground">{stats.totalUsers.toLocaleString()}</span>
+                  <span className="text-sm font-medium text-muted-foreground">Active Users</span>
                 </div>
               </div>
             </div>

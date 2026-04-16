@@ -1,8 +1,30 @@
-import { useParams, Link } from 'react-router-dom';
-import { CheckCircle2, Calendar, Clock, MapPin, Download } from 'lucide-react';
+import { useParams, useLocation, Link } from 'react-router-dom';
+import { CheckCircle2, Calendar, Clock, MapPin, Download, Terminal } from 'lucide-react';
 
 export const RegistrationSuccess = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
+  const state = location.state as {
+    submission?: { id: string; uniqueId: string; qrCode: string; status: string; confirmationMessage?: string };
+    formTitle?: string;
+    confirmationMessage?: string;
+    orgName?: string;
+  } | null;
+
+  const submission = state?.submission;
+  const formTitle = state?.formTitle || 'Registration';
+  const orgName = state?.orgName || 'NYDev Form Generator';
+  const confirmationMessage = state?.confirmationMessage || submission?.confirmationMessage || 'Your registration has been submitted successfully.';
+
+  const handleDownloadQR = () => {
+    if (!submission?.qrCode) return;
+    const link = document.createElement('a');
+    link.href = submission.qrCode;
+    link.download = `qr-${submission.uniqueId || 'code'}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground selection:bg-primary/30">
@@ -14,12 +36,12 @@ export const RegistrationSuccess = () => {
               <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
             </svg>
           </div>
-          <h2 className="text-lg font-bold leading-tight tracking-tight text-foreground">Worship Night 2024</h2>
+          <h2 className="text-lg font-bold leading-tight tracking-tight text-foreground">{formTitle}</h2>
         </div>
         <div className="flex items-center gap-4 lg:gap-8">
           <nav className="hidden items-center gap-6 md:flex lg:gap-9">
             <Link to="/" className="text-sm font-medium leading-normal text-muted-foreground transition-colors hover:text-primary">Home</Link>
-            <Link to={`/f/${id}`} className="text-sm font-medium leading-normal text-muted-foreground transition-colors hover:text-primary">Event Details</Link>
+            <Link to={`/f/${slug}`} className="text-sm font-medium leading-normal text-muted-foreground transition-colors hover:text-primary">Event Details</Link>
           </nav>
           <Link
             to="/login"
@@ -48,7 +70,7 @@ export const RegistrationSuccess = () => {
             Registration Successful!
           </h1>
           <p className="max-w-lg text-lg leading-relaxed text-muted-foreground">
-            You are all set for Worship Night 2024. A confirmation email has been sent to your inbox.
+            {confirmationMessage}
           </p>
         </div>
 
@@ -57,34 +79,29 @@ export const RegistrationSuccess = () => {
           <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl">
             {/* Card Header */}
             <div className="border-b border-dashed border-border bg-primary/5 p-6 text-center dark:bg-primary/10">
-              <h3 className="text-xl font-bold tracking-tight text-foreground">Worship Night 2024</h3>
-              <div className="mt-2 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-                <Calendar size={18} />
-                <span>Oct 24, 2024</span>
-                <span className="mx-1">•</span>
-                <Clock size={18} />
-                <span>7:00 PM</span>
-              </div>
-              <div className="mt-1 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-                <MapPin size={18} />
-                <span>Main Cathedral Hall</span>
-              </div>
+              <h3 className="text-xl font-bold tracking-tight text-foreground">{formTitle}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{orgName}</p>
             </div>
 
             {/* QR Section */}
             <div className="flex flex-col items-center bg-card p-8">
-              <div className="mb-6 rounded-xl border border-border bg-white p-3 shadow-inner">
-                {/* Simulated QR Code (Static for demo) */}
-                <img
-                  alt="QR Code for event entry"
-                  className="size-48 object-contain md:size-56"
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=NYDEV-REG-${id}-8829`}
-                />
-              </div>
+              {submission?.qrCode ? (
+                <div className="mb-6 rounded-xl border border-border bg-white p-3 shadow-inner">
+                  <img
+                    alt="QR Code for verification"
+                    className="size-48 object-contain md:size-56"
+                    src={submission.qrCode}
+                  />
+                </div>
+              ) : (
+                <div className="mb-6 flex size-48 items-center justify-center rounded-xl border border-dashed border-border bg-muted md:size-56">
+                  <p className="text-sm text-muted-foreground">QR Code</p>
+                </div>
+              )}
               <div className="w-full text-center">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">Registration ID</p>
                 <p className="inline-block rounded-lg border border-border bg-muted/50 px-4 py-2 font-mono text-3xl font-bold tracking-wider text-foreground">
-                  RWM-8829
+                  {submission?.uniqueId || '—'}
                 </p>
               </div>
             </div>
@@ -92,15 +109,20 @@ export const RegistrationSuccess = () => {
             {/* Footer / Instructions */}
             <div className="border-t border-border bg-muted/30 p-6 text-center">
               <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
-                Please present this QR code at the entrance for verification.
+                Please save or screenshot this QR code for verification at the event.
               </p>
-              <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]">
-                <Download size={20} />
-                <span>Download QR Code</span>
-              </button>
-              <Link to={`/f/${id}`}>
+              {submission?.qrCode && (
+                <button
+                  onClick={handleDownloadQR}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
+                >
+                  <Download size={20} />
+                  <span>Download QR Code</span>
+                </button>
+              )}
+              <Link to={`/f/${slug}`}>
                 <button className="mt-3 w-full py-2 text-sm font-semibold text-primary transition-colors hover:text-blue-600 dark:hover:text-blue-400">
-                  View Event Details
+                  View Form Details
                 </button>
               </Link>
             </div>
@@ -111,6 +133,10 @@ export const RegistrationSuccess = () => {
           </div>
         </div>
 
+        <div className="mt-8 flex items-center gap-1.5 text-xs text-muted-foreground opacity-60">
+          <Terminal size={12} />
+          <span>Powered by NYDev Form Generator</span>
+        </div>
       </main>
     </div>
   );

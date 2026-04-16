@@ -23,6 +23,7 @@ const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const superAdminRoutes = require('./routes/superAdminRoutes');
 const brandingRoutes = require('./routes/brandingRoutes');
+const publicStatsRoutes = require('./routes/publicStatsRoutes');
 
 const app = express();
 
@@ -39,9 +40,6 @@ app.use(hpp());
 const allowedOrigins = [
   "http://localhost:5173", // local dev
   "http://localhost:8081", // local mobile dev
-  "http://192.168.1.12:8081", // local mobile dev on physical device
-  "http://192.168.1.12:5000", // local mobile app on physical device
-  "http://192.168.1.12", // Allow from your machine IP
   "https://nydev-form-generation.vercel.app", //deployed url
 ];
 
@@ -56,7 +54,7 @@ app.use(
     },
     credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Idempotency-Key'],
   }),
 );
 
@@ -165,6 +163,7 @@ app.use('/api/organizations', brandingRoutes);
 app.use('/api/f', publicRoutes);
 app.use('/api/verify', verifyRoutes);
 app.use('/api/superadmin', superAdminRoutes);
+app.use('/api/public', publicStatsRoutes);
 
 // ─── 404 Handler ─────────────────────────────────────────────
 app.all('*', (req, res, next) => {

@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema, type LoginFormData, type RegisterFormData } from '../../schemas/auth.schema';
 import { useAuth } from '../../hooks/useAuth';
-import api from '../../services/api';
+import { authService } from '../../services/auth.service';
 import { Lock, Eye, EyeOff } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Login = () => {
   const [globalError, setGlobalError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const from = location.state?.from?.pathname || '/dashboard';
+  const from = location.state?.from?.pathname;
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -33,14 +34,22 @@ const Login = () => {
     setLoading(true);
     setGlobalError('');
     try {
-      const response: any = await api.post('/auth/login', {
-        email: data.email,
-        password: data.password,
-      });
-      login(response.data.token, response.data.user);
-      navigate(from, { replace: true });
+      const response = await authService.login({ email: data.email, password: data.password });
+      const { user, token, organization } = response.data;
+      login(token, user, organization as any);
+      toast.success(`Welcome back, ${user.firstName}!`);
+
+      // Role-based redirect
+      if (from) {
+        navigate(from, { replace: true });
+      } else if (user.role === 'superadmin') {
+        navigate('/superadmin', { replace: true });
+      } else {
+        navigate('/dashboard', { replace: true });
+      }
     } catch (err: any) {
       setGlobalError(err.message || 'An error occurred during authentication');
+      toast.error(err.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -50,18 +59,21 @@ const Login = () => {
     setLoading(true);
     setGlobalError('');
     try {
-      const response: any = await api.post('/auth/register', data);
-      login(response.data.token, response.data.user);
-      navigate(from, { replace: true });
+      const response = await authService.register(data);
+      const { user, token, organization } = response.data;
+      login(token, user, organization as any);
+      toast.success('Account created successfully!');
+      navigate('/dashboard', { replace: true });
     } catch (err: any) {
-      setGlobalError(err.message || 'An error occurred during authentication');
+      setGlobalError(err.message || 'An error occurred during registration');
+      toast.error(err.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleLogin = () => {
-    alert('Google login integration pending backend OAuth implementation');
+    toast.info('Google login coming soon!');
   };
 
   return (

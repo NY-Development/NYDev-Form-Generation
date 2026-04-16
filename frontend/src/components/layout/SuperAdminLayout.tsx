@@ -11,8 +11,11 @@ import {
   Menu,
   Bell,
   Search,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
+import { useUiStore } from '../../store/ui.store';
 
 export const SuperAdminLayout = ({
   children,
@@ -22,21 +25,30 @@ export const SuperAdminLayout = ({
   title: string;
 }) => {
   const { logout } = useAuth();
+  const { theme, toggleTheme, sidebarOpen, toggleSidebar } = useUiStore();
 
   const navItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
-    { icon: Building2, label: 'Organizations', path: '/admin/orgs' },
-    { icon: FileText, label: 'Audit Logs', path: '/admin/logs' },
-    { icon: Users, label: 'Users & Roles', path: '/admin/users' },
-    { icon: Settings, label: 'Settings', path: '/admin/settings' },
-    { icon: HelpCircle, label: 'Support', path: '/admin/support' },
+    { icon: LayoutDashboard, label: 'Dashboard', path: '/superadmin' },
+    { icon: Building2, label: 'Organizations', path: '/superadmin/organizations' },
+    { icon: FileText, label: 'Audit Logs', path: '/superadmin/logs' },
+    { icon: Users, label: 'Users & Roles', path: '/superadmin/users' },
+    { icon: Settings, label: 'Settings', path: '/superadmin/settings' },
+    { icon: HelpCircle, label: 'Support', path: '/superadmin/support' },
   ];
 
   return (
     <div className="flex min-h-screen w-full overflow-hidden bg-background text-foreground">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity" 
+          onClick={toggleSidebar}
+        />
+      )}
+
       {/* Sidebar Navigation */}
-      <nav className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-border bg-card md:flex">
-        <div className="flex h-full flex-col justify-between p-4">
+      <nav className={`fixed inset-y-0 left-0 z-50 md:static md:flex h-screen shrink-0 flex-col overflow-y-auto border-border bg-card transition-all duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0 w-64 border-r' : '-translate-x-full md:translate-x-0 w-64 md:w-0 border-r-0'} overflow-hidden shadow-xl md:shadow-none`}>
+        <div className="flex h-full min-w-64 flex-col justify-between p-4">
           <div className="flex flex-col gap-6">
             {/* User Profile / Brand */}
             <div className="flex items-center gap-3 px-2">
@@ -90,7 +102,7 @@ export const SuperAdminLayout = ({
         {/* Top Header */}
         <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-border bg-card px-6">
           <div className="flex items-center gap-4">
-            <button className="p-1 text-muted-foreground md:hidden">
+            <button onClick={toggleSidebar} className="p-1 text-muted-foreground transition-colors hover:text-foreground">
               <Menu size={24} />
             </button>
             <h2 className="hidden text-lg font-semibold text-foreground sm:block">{title}</h2>
@@ -104,6 +116,9 @@ export const SuperAdminLayout = ({
                 placeholder="Search tenants, users..."
               />
             </div>
+            <button onClick={toggleTheme} className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <button className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
               <Bell size={20} />
               <span className="absolute right-2 top-2 size-2 rounded-full border border-card bg-red-500"></span>
