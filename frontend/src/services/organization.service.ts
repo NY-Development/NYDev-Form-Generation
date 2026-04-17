@@ -5,7 +5,7 @@ export const organizationService = {
   getOrganization: (orgId: string) =>
     api.get(`/organizations/${orgId}`) as Promise<ApiResponse<{ organization: Organization }>>,
 
-  updateOrganization: (orgId: string, data: Partial<Pick<Organization, 'name' | 'description' | 'logo' | 'settings'>>) =>
+  updateOrganization: (orgId: string, data: Partial<Pick<Organization, 'name' | 'description' | 'logo' | 'settings' | 'branding'>>) =>
     api.put(`/organizations/${orgId}`, data) as Promise<ApiResponse<{ organization: Organization }>>,
 
   getMembers: (orgId: string) =>

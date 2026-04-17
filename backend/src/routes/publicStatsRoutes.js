@@ -12,12 +12,15 @@ const router = express.Router();
 // @access  Public
 router.get('/stats', async (req, res, next) => {
   try {
-    const [totalOrgs, totalForms, totalSubmissions, totalUsers] = await Promise.all([
+    const [totalOrgs, totalForms, totalSubmissions, totalUsers, orgsWithLogos] = await Promise.all([
       Organization.countDocuments({ isActive: true }),
       Form.countDocuments({ status: 'published' }),
       Submission.countDocuments(),
       User.countDocuments({ isActive: true }),
+      Organization.find({ isActive: true, logo: { $ne: '' }, 'logo': { $exists: true } }).limit(5).select('logo'),
     ]);
+
+    const topLogos = orgsWithLogos.map(org => org.logo).filter(Boolean);
 
     sendSuccess(res, {
       stats: {
@@ -25,6 +28,7 @@ router.get('/stats', async (req, res, next) => {
         totalForms,
         totalSubmissions,
         totalUsers,
+        topLogos,
       },
     });
   } catch (error) {

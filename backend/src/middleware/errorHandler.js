@@ -60,10 +60,12 @@ const errorHandler = (err, req, res, next) => {
   }
 
   // Programming or unknown errors: don't leak details
+  console.error('ERROR STACK:', err.stack);
   console.error('ERROR:', err);
   return res.status(500).json({
     success: false,
-    message: 'Something went wrong',
+    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong',
+    error: err
   });
 };
 

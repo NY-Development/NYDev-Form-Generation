@@ -35,6 +35,16 @@ router.post(
   authController.login
 );
 
+// @route   POST /api/auth/google
+router.post(
+  '/google',
+  [
+    body('code').notEmpty().withMessage('Google auth code is required'),
+  ],
+  validate,
+  authController.googleLogin
+);
+
 // @route   GET /api/auth/me
 router.get('/me', protect, authController.getMe);
 

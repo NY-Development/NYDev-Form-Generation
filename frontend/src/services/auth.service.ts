@@ -30,6 +30,9 @@ export const authService = {
   login: (data: LoginPayload) =>
     api.post('/auth/login', data) as Promise<ApiResponse<LoginResponse>>,
 
+  googleLogin: (code: string) => 
+    api.post('/auth/google', { code }) as Promise<ApiResponse<LoginResponse>>,
+
   register: (data: RegisterPayload) =>
     api.post('/auth/register', data) as Promise<ApiResponse<RegisterResponse>>,
 

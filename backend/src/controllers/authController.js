@@ -51,6 +51,31 @@ const login = async (req, res, next) => {
 };
 
 /**
+ * @desc    Google Login
+ * @route   POST /api/auth/google
+ * @access  Public
+ */
+const googleLogin = async (req, res, next) => {
+  try {
+    const { code } = req.body;
+    const result = await authService.googleLogin({ code });
+
+    const cookieOptions = {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    };
+    res.cookie('token', result.token, cookieOptions);
+
+    sendSuccess(res, result, 200, 'Google login successful');
+  } catch (error) {
+    console.error('[Google OAuth Error]:', error);
+    next(error);
+  }
+};
+
+/**
  * @desc    Get current user profile
  * @route   GET /api/auth/me
  * @access  Private
@@ -111,6 +136,7 @@ const logout = (req, res, next) => {
 module.exports = {
   register,
   login,
+  googleLogin,
   getMe,
   updatePassword,
   updateProfile,

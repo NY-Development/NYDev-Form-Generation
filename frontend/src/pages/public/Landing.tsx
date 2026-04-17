@@ -5,7 +5,7 @@ import { Navbar } from '../../components/layout/Navbar';
 import { publicService } from '../../services/public.service';
 
 const Landing = () => {
-  const [stats, setStats] = useState({ totalOrganizations: 0, totalForms: 0, totalSubmissions: 0, totalUsers: 0 });
+  const [stats, setStats] = useState<any>({ totalOrganizations: 0, totalForms: 0, totalSubmissions: 0, totalUsers: 0, topLogos: [] });
 
   useEffect(() => {
     publicService.getPublicStats()
@@ -54,27 +54,21 @@ const Landing = () => {
                   {/* trust organizations */}
                   <div className="flex items-center gap-4 pt-4">
                     <div className="flex -space-x-3">
-                      <div
-                        className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center"
-                        style={{
-                          backgroundImage:
-                            'url("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64")',
-                        }}
-                      ></div>
-                      <div
-                        className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center"
-                        style={{
-                          backgroundImage:
-                            'url("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64")',
-                        }}
-                      ></div>
-                      <div
-                        className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center"
-                        style={{
-                          backgroundImage:
-                            'url("https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64")',
-                        }}
-                      ></div>
+                      {stats.topLogos?.length > 0 ? (
+                        stats.topLogos.slice(0, 3).map((logoUrl: string, idx: number) => (
+                          <div
+                            key={idx}
+                            className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center"
+                            style={{ backgroundImage: `url("${logoUrl}")` }}
+                          ></div>
+                        ))
+                      ) : (
+                        <>
+                          <div className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64")' }}></div>
+                          <div className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64")' }}></div>
+                          <div className="h-10 w-10 rounded-full border-2 border-background bg-muted bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64")' }}></div>
+                        </>
+                      )}
                     </div>
                     <div className="text-sm text-muted-foreground">
                       <span className="font-bold text-foreground">{stats.totalOrganizations > 0 ? stats.totalOrganizations.toLocaleString() + '+' : '2,000+'}</span> event organizers trust us

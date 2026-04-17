@@ -20,6 +20,8 @@ router.put(
   [
     body('name').optional().trim().notEmpty().withMessage('Organization name cannot be empty'),
     body('description').optional().trim(),
+    body('logo').optional(),
+    body('branding').optional().isObject(),
   ],
   validate,
   organizationController.updateOrganization

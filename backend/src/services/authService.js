@@ -2,6 +2,14 @@ const User = require('../models/User');
 const Organization = require('../models/Organization');
 const Subscription = require('../models/Subscription');
 const AppError = require('../utils/AppError');
+const { OAuth2Client } = require('google-auth-library');
+const env = require('../config/env');
+
+const client = new OAuth2Client(
+  env.GOOGLE_CLIENT_ID,
+  env.GOOGLE_CLIENT_SECRET,
+  'postmessage'
+);
 
 /**
  * Register a new user and create their organization
@@ -106,6 +114,85 @@ const login = async ({ email, password }) => {
 };
 
 /**
+ * Handle Google Login (OAuth Code Exchange)
+ */
+const googleLogin = async ({ code }) => {
+  const { tokens } = await client.getToken(code);
+  
+  const ticket = await client.verifyIdToken({
+    idToken: tokens.id_token,
+    audience: env.GOOGLE_CLIENT_ID,
+  });
+  
+  const payload = ticket.getPayload();
+  const { email, given_name, family_name, picture, sub } = payload;
+
+  let user = await User.findOne({ email });
+  let organization;
+
+  if (user) {
+    if (!user.googleId) {
+      user.googleId = sub;
+    }
+    user.lastLogin = new Date();
+    if (picture && !user.avatar) {
+      user.avatar = picture;
+    }
+    await user.save({ validateBeforeSave: false });
+    organization = await Organization.findOne({ owner: user._id });
+  } else {
+    // Determine free plan
+    const limits = Subscription.getPlanLimits ? Subscription.getPlanLimits('free') : undefined;
+
+    user = await User.create({
+      firstName: given_name,
+      lastName: family_name || 'User',
+      email,
+      googleId: sub,
+      avatar: picture,
+      role: 'owner',
+    });
+
+    organization = await Organization.create({
+      name: `${given_name}'s Organization`,
+      owner: user._id,
+    });
+
+    const subscription = await Subscription.create({
+      organizationId: organization._id,
+      plan: 'free',
+      limits: limits,
+    });
+
+    organization.subscription = subscription._id;
+    await organization.save();
+
+    user.organizationId = organization._id;
+    await user.save();
+  }
+
+  const token = user.generateJWT();
+
+  return {
+    user: {
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+      avatar: user.avatar,
+      organizationId: user.organizationId,
+    },
+    organization: organization ? {
+      id: organization._id,
+      name: organization.name,
+      slug: organization.slug,
+    } : null,
+    token,
+  };
+};
+
+/**
  * Get user profile with organization details
  */
 const getProfile = async (userId) => {
@@ -179,6 +266,7 @@ const updateProfile = async (userId, updates) => {
 module.exports = {
   register,
   login,
+  googleLogin,
   getProfile,
   updatePassword,
   updateProfile,

@@ -20,6 +20,12 @@ export const SettingsPage = () => {
   // New admin form
   const [newAdmin, setNewAdmin] = useState({ firstName: '', lastName: '', email: '', password: '' });
 
+  // Branding states
+  const [brandingVars, setBrandingVars] = useState({
+    primaryColor: organization?.branding?.primaryColor || '#1152d4',
+    logo: organization?.logo || ''
+  });
+
   useEffect(() => {
     if (activeTab === 'members' && orgId) {
       fetchMembers();
@@ -44,6 +50,22 @@ export const SettingsPage = () => {
       const res = await organizationService.updateOrganization(orgId, { name: orgName, description: orgDescription });
       setOrganization(res.data.organization);
       toast.success('Organization updated!');
+    } catch (err: any) {
+      toast.error(err.message || 'Update failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveBranding = async () => {
+    setLoading(true);
+    try {
+      const res = await organizationService.updateOrganization(orgId, { 
+        branding: { primaryColor: brandingVars.primaryColor } as any, 
+        logo: brandingVars.logo 
+      });
+      setOrganization(res.data.organization);
+      toast.success('Branding updated!');
     } catch (err: any) {
       toast.error(err.message || 'Update failed');
     } finally {
@@ -206,28 +228,55 @@ export const SettingsPage = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-foreground">Primary Color</label>
               <div className="flex items-center gap-3">
-                <input type="color" defaultValue={organization?.branding?.primaryColor || '#1152d4'} className="h-10 w-14 cursor-pointer rounded border border-border p-0" />
-                <span className="text-sm text-muted-foreground">{organization?.branding?.primaryColor || '#1152d4'}</span>
+                <input type="color" value={brandingVars.primaryColor} onChange={(e) => setBrandingVars({ ...brandingVars, primaryColor: e.target.value })} className="h-10 w-14 cursor-pointer rounded border border-border p-0" />
+                <span className="text-sm text-muted-foreground">{brandingVars.primaryColor}</span>
               </div>
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-foreground">Logo</label>
-              <div className="flex items-center gap-4 rounded-lg border border-dashed border-border bg-muted/30 p-6">
-                {organization?.logo ? (
-                  <img src={organization.logo} alt="Logo" className="h-16 w-16 rounded-lg object-cover" />
+              <label className="relative flex cursor-pointer items-center gap-4 rounded-lg border border-dashed border-border bg-muted/30 p-6 hover:bg-muted/50 transition-colors">
+                <input 
+                  type="file" 
+                  accept="image/svg+xml, image/png, image/jpeg" 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      if (file.size > 2 * 1024 * 1024) {
+                        toast.error('Image must be less than 2MB');
+                        return;
+                      }
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setBrandingVars({ ...brandingVars, logo: reader.result as string });
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} 
+                />
+                {brandingVars.logo ? (
+                  <img src={brandingVars.logo} alt="Logo" className="h-16 w-16 rounded-lg object-contain bg-white" />
                 ) : (
                   <div className="flex size-16 items-center justify-center rounded-lg bg-muted text-muted-foreground">
                     <Settings size={24} />
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-medium text-foreground">Upload organization logo</p>
+                  <p className="text-sm font-medium text-foreground">Click to upload organization logo</p>
                   <p className="text-xs text-muted-foreground">PNG, JPG up to 2MB</p>
                 </div>
-              </div>
+              </label>
+              {brandingVars.logo && (
+                <button 
+                  onClick={() => setBrandingVars({ ...brandingVars, logo: '' })}
+                  className="text-xs text-destructive hover:underline self-start"
+                >
+                  Remove logo
+                </button>
+              )}
             </div>
-            <button className="flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground shadow-sm hover:bg-primary/90">
-              <Save size={16} /> Save Branding
+            <button onClick={handleSaveBranding} disabled={loading} className="flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground shadow-sm hover:bg-primary/90 disabled:opacity-50">
+              <Save size={16} /> {loading ? 'Saving...' : 'Save Branding'}
             </button>
           </div>
         </div>

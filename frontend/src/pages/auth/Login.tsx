@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema, type LoginFormData, type RegisterFormData } from '../../schemas/auth.schema';
 import { useAuth } from '../../hooks/useAuth';
 import { authService } from '../../services/auth.service';
+import { useGoogleLogin } from '@react-oauth/google';
 import { Lock, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -72,8 +73,36 @@ const Login = () => {
     }
   };
 
+  const triggerGoogleOAuth = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async (codeResponse) => {
+      setLoading(true);
+      setGlobalError('');
+      try {
+        const response = await authService.googleLogin(codeResponse.code);
+        const { user, token, organization } = response.data;
+        login(token, user, organization as any);
+        toast.success(`Welcome back, ${user.firstName}!`);
+
+        if (from) {
+          navigate(from, { replace: true });
+        } else if (user.role === 'superadmin') {
+          navigate('/superadmin', { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
+      } catch (err: any) {
+        setGlobalError(err.message || 'An error occurred during Google authentication');
+        toast.error(err.message || 'Google Login failed');
+      } finally {
+        setLoading(false);
+      }
+    },
+    onError: () => toast.error('Google Sign-In failed'),
+  });
+
   const handleGoogleLogin = () => {
-    toast.info('Google login coming soon!');
+    triggerGoogleOAuth();
   };
 
   return (
