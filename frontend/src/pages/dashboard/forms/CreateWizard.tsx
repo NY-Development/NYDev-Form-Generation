@@ -35,6 +35,7 @@ export const CreateWizard = () => {
     title: '',
     description: '',
     primaryColor: '#1152d4',
+    headerImage: '',
   });
   const [fields, setFields] = useState<FormField[]>([]);
   const [savedFormId, setSavedFormId] = useState(editId || '');
@@ -45,7 +46,7 @@ export const CreateWizard = () => {
     if (editId && orgId) {
       formService.getForm(orgId, editId).then((res) => {
         const form = res.data.form || res.data;
-        setFormData({ title: form.title, description: form.description, primaryColor: form.branding?.primaryColor || '#1152d4' });
+        setFormData({ title: form.title, description: form.description, primaryColor: form.branding?.primaryColor || '#1152d4', headerImage: form.branding?.headerImage || '' });
         setFields(form.fields || []);
         setSavedFormId(editId);
       }).catch((err: any) => toast.error(err.message || 'Failed to load form'));
@@ -123,7 +124,12 @@ export const CreateWizard = () => {
     if (!savedFormId || !orgId) return;
     setSaving(true);
     try {
-      await formService.updateForm(orgId, savedFormId, { branding: { primaryColor: formData.primaryColor } as any });
+      await formService.updateForm(orgId, savedFormId, { 
+        branding: { 
+          primaryColor: formData.primaryColor,
+          headerImage: formData.headerImage 
+        } as any 
+      });
       toast.success('Branding saved!');
       nextStep();
     } catch (err: any) { toast.error(err.message); }
@@ -330,15 +336,48 @@ export const CreateWizard = () => {
           <div className="flex flex-col gap-8 lg:col-span-5">
             <div className="flex flex-col gap-4">
               <h2 className="border-b border-border pb-2 text-lg font-bold tracking-tight text-foreground">Logo Upload</h2>
-              <div className="group flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-border bg-muted/50 p-8 text-center transition-colors hover:bg-muted">
-                <div className="flex size-12 items-center justify-center rounded-full bg-background text-muted-foreground transition-colors group-hover:text-primary">
-                  <CloudUpload size={24} />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm font-medium text-foreground">Click to upload or drag and drop</p>
-                  <p className="text-xs text-muted-foreground">SVG, PNG, JPG (max. 800x400px)</p>
-                </div>
-              </div>
+              <label className="group relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-border bg-muted/50 p-8 text-center transition-colors hover:bg-muted overflow-hidden">
+                <input 
+                  type="file" 
+                  accept="image/svg+xml, image/png, image/jpeg" 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      if (file.size > 1024 * 1024) {
+                        toast.error('Image must be less than 1MB');
+                        return;
+                      }
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setFormData((prev) => ({ ...prev, headerImage: reader.result as string }));
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} 
+                />
+                {formData.headerImage ? (
+                  <img src={formData.headerImage} alt="Logo preview" className="max-h-24 object-contain" />
+                ) : (
+                  <>
+                    <div className="flex size-12 items-center justify-center rounded-full bg-background text-muted-foreground transition-colors group-hover:text-primary">
+                      <CloudUpload size={24} />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <p className="text-sm font-medium text-foreground">Click to upload or drag and drop</p>
+                      <p className="text-xs text-muted-foreground">SVG, PNG, JPG (max. 1MB)</p>
+                    </div>
+                  </>
+                )}
+              </label>
+              {formData.headerImage && (
+                <button 
+                  onClick={() => setFormData((prev) => ({ ...prev, headerImage: '' }))}
+                  className="text-xs text-destructive hover:underline self-start"
+                >
+                  Remove logo
+                </button>
+              )}
             </div>
             <div className="flex flex-col gap-5">
               <h2 className="border-b border-border pb-2 text-lg font-bold tracking-tight text-foreground">Theme Colors</h2>
@@ -372,7 +411,10 @@ export const CreateWizard = () => {
             <div className="relative flex-1 overflow-hidden rounded-xl border border-border bg-muted/30 p-6 shadow-inner md:p-10">
               <div className="mx-auto flex h-full w-full max-w-lg flex-col overflow-hidden rounded-lg border border-border bg-card shadow-xl">
                 <div className="flex flex-1 flex-col overflow-y-auto p-6 md:p-8">
-                  <div className="mb-8 text-center">
+                  <div className="mb-8 text-center flex flex-col items-center">
+                    {formData.headerImage && (
+                      <img src={formData.headerImage} alt="Form Logo" className="mb-4 max-h-16 object-contain" />
+                    )}
                     <h3 className="mb-2 text-2xl font-bold text-foreground">{formData.title || 'Untitled Form'}</h3>
                     <p className="text-sm text-muted-foreground">{formData.description}</p>
                   </div>

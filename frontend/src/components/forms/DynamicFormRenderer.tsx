@@ -26,6 +26,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             value={value as string}
             onChange={(e) => onChange(field.fieldId, e.target.value)}
             placeholder={field.placeholder || ''}
+            required={field.required}
             className={baseInputClass}
           />
         );
@@ -39,6 +40,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             placeholder={field.placeholder || ''}
             min={field.validation?.min}
             max={field.validation?.max}
+            required={field.required}
             className={baseInputClass}
           />
         );
@@ -50,6 +52,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             onChange={(e) => onChange(field.fieldId, e.target.value)}
             placeholder={field.placeholder || ''}
             rows={4}
+            required={field.required}
             className="w-full rounded-lg border border-border bg-background p-4 text-foreground shadow-sm transition-colors focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y min-h-[100px]"
           />
         );
@@ -59,6 +62,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
           <select
             value={value as string}
             onChange={(e) => onChange(field.fieldId, e.target.value)}
+            required={field.required}
             className={baseInputClass}
           >
             <option value="">{field.placeholder || 'Select an option...'}</option>
@@ -80,6 +84,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
                   name={field.fieldId}
                   value={opt.value}
                   checked={value === opt.value}
+                  required={field.required && !value}
                   onChange={(e) => onChange(field.fieldId, e.target.value)}
                   className="h-4 w-4 border-border text-primary focus:ring-primary"
                 />
@@ -122,6 +127,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             type="date"
             value={value as string}
             onChange={(e) => onChange(field.fieldId, e.target.value)}
+            required={field.required}
             className={baseInputClass}
           />
         );
@@ -132,6 +138,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             type="time"
             value={value as string}
             onChange={(e) => onChange(field.fieldId, e.target.value)}
+            required={field.required}
             className={baseInputClass}
           />
         );
@@ -141,6 +148,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
           <input
             type="file"
             onChange={(e) => onChange(field.fieldId, e.target.files?.[0] || null)}
+            required={field.required && !value}
             className="w-full rounded-lg border border-border bg-background p-2 text-sm text-foreground file:mr-4 file:rounded-md file:border-0 file:bg-primary/10 file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary"
           />
         );
@@ -152,6 +160,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             onChange={(e) => onChange(field.fieldId, e.target.value)}
             placeholder={field.placeholder || 'Enter your full address...'}
             rows={3}
+            required={field.required}
             className="w-full rounded-lg border border-border bg-background p-4 text-foreground shadow-sm transition-colors focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
           />
         );
@@ -163,6 +172,7 @@ export const DynamicFormRenderer = ({ fields, values, onChange, errors }: Dynami
             value={value as string}
             onChange={(e) => onChange(field.fieldId, e.target.value)}
             placeholder={field.placeholder || ''}
+            required={field.required}
             className={baseInputClass}
           />
         );

@@ -51,6 +51,7 @@ const Landing = () => {
                       </span>
                     </button>
                   </div>
+                  {/* trust organizations */}
                   <div className="flex items-center gap-4 pt-4">
                     <div className="flex -space-x-3">
                       <div

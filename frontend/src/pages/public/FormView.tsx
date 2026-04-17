@@ -113,7 +113,17 @@ export const FormView = () => {
   const fields: FormField[] = form?.fields || [];
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary/30 text-foreground">
+    <div className="relative flex min-h-screen flex-col bg-background selection:bg-primary/30 text-foreground overflow-hidden">
+      
+      {/* Watermark for free plan */}
+      {(!form?.organization?.subscription || form.organization.subscription.plan === 'free') && (
+        <div className="fixed inset-0 pointer-events-none flex items-center justify-center -z-10 overflow-hidden">
+          <div className="text-[12vw] font-black text-primary/5 -rotate-12 whitespace-nowrap select-none">
+            NYDEV FORMS
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="z-10 flex items-center justify-between whitespace-nowrap border-b border-border bg-card px-6 py-4 shadow-sm sm:px-10">
         <div className="flex items-center gap-4">
@@ -140,20 +150,22 @@ export const FormView = () => {
           {/* Event Hero */}
           <div className="overflow-hidden rounded-xl border border-border bg-card shadow-lg">
             <div
-              className="relative flex h-48 w-full items-end p-8"
+              className={`relative flex ${form?.branding?.headerImage ? 'h-64 items-center justify-center' : 'h-48 items-end'} w-full p-8`}
               style={{ backgroundColor: form?.branding?.primaryColor || '#3b82f6' }}
             >
-              {form?.branding?.headerImage && (
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
-                  style={{ backgroundImage: `url('${form.branding.headerImage}')` }}
+              {form?.branding?.headerImage ? (
+                <img 
+                  src={form.branding.headerImage} 
+                  alt="Form Logo" 
+                  className="z-10 max-h-48 max-w-full object-contain filter drop-shadow-md" 
                 />
+              ) : (
+                <div className="relative z-10 text-white">
+                  <h1 className="mb-2 text-4xl font-black leading-tight tracking-tight text-white/90 drop-shadow-sm">
+                    {form?.title || 'Untitled Form'}
+                  </h1>
+                </div>
               )}
-              <div className="relative z-10 text-white">
-                <h1 className="mb-2 text-4xl font-black leading-tight tracking-tight text-white/90 drop-shadow-sm">
-                  {form?.title || 'Untitled Form'}
-                </h1>
-              </div>
             </div>
             {form?.description && (
               <div className="p-8">

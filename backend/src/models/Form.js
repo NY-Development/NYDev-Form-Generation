@@ -74,9 +74,14 @@ const formSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
+      required: [true, 'Form slug is required'],
       unique: true,
       lowercase: true,
       index: true,
+    },
+    link: {
+      type: String,
+      required: [true, 'Form link is required'],
     },
     description: {
       type: String,
@@ -150,23 +155,7 @@ const formSchema = new mongoose.Schema(
   }
 );
 
-// Generate unique slug before saving
-formSchema.pre('save', async function (next) {
-  if (this.isModified('title')) {
-    let baseSlug = slugify(this.title, { lower: true, strict: true });
-    let slug = baseSlug;
-    let counter = 1;
-
-    // Ensure slug uniqueness
-    while (await mongoose.models.Form.findOne({ slug, _id: { $ne: this._id } })) {
-      slug = `${baseSlug}-${counter}`;
-      counter++;
-    }
-
-    this.slug = slug;
-  }
-  next();
-});
+// Pre-save hook for slug removed. Slugs and links are now generated in the formService to guarantee atomic creation parameters.
 
 // Virtual: submissions
 formSchema.virtual('submissions', {

@@ -1,3 +1,5 @@
+const slugify = require('slugify');
+const env = require('../config/env');
 const Form = require('../models/Form');
 const Organization = require('../models/Organization');
 const Subscription = require('../models/Subscription');
@@ -21,8 +23,22 @@ const create = async ({ title, description, fields, settings, branding, template
     }
   }
 
+  // Generate unique slug and link
+  let baseSlug = slugify(title, { lower: true, strict: true });
+  let slug = baseSlug;
+  let counter = 1;
+
+  while (await Form.findOne({ slug })) {
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+
+  const link = `${env.CLIENT_URL}/f/${slug}`;
+
   const form = await Form.create({
     title,
+    slug,
+    link,
     description,
     fields: fields || [],
     settings: settings || {},
@@ -221,8 +237,22 @@ const cloneFromTemplate = async (templateId, organizationId, createdBy) => {
     throw new AppError('Template not found.', 404);
   }
 
+  const newTitle = `${template.title} (Copy)`;
+  let baseSlug = slugify(newTitle, { lower: true, strict: true });
+  let slug = baseSlug;
+  let counter = 1;
+
+  while (await Form.findOne({ slug })) {
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+
+  const link = `${env.CLIENT_URL}/f/${slug}`;
+
   const newForm = await Form.create({
-    title: `${template.title} (Copy)`,
+    title: newTitle,
+    slug,
+    link,
     description: template.description,
     fields: template.fields,
     settings: template.settings,

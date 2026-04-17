@@ -74,6 +74,7 @@ export interface Form {
   _id?: string;
   title: string;
   slug: string;
+  link: string;
   description: string;
   organizationId: string | Organization;
   createdBy: string | User;
