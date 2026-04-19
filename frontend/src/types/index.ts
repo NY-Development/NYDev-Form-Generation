@@ -60,6 +60,11 @@ export interface OrgBranding {
   logo: string;
   favicon: string;
   fontFamily: string;
+  socialLinks?: {
+    youtube?: string;
+    tiktok?: string;
+    instagram?: string;
+  };
 }
 
 export interface OrgSettings {
@@ -113,7 +118,9 @@ export type FieldType =
   | 'time'
   | 'file'
   | 'url'
-  | 'address';
+  | 'address'
+  | 'video'
+  | 'page_break';
 
 export interface FieldOption {
   label: string;
@@ -147,6 +154,11 @@ export interface FormBranding {
   fontFamily: string;
   showOrgLogo: boolean;
   customCSS: string;
+  socialLinks?: {
+    youtube?: string;
+    tiktok?: string;
+    instagram?: string;
+  };
 }
 
 export interface FormTemplate {

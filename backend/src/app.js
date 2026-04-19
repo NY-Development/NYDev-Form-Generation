@@ -24,6 +24,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const superAdminRoutes = require('./routes/superAdminRoutes');
 const brandingRoutes = require('./routes/brandingRoutes');
 const publicStatsRoutes = require('./routes/publicStatsRoutes');
+const stripeRoutes = require('./routes/stripeRoutes');
 
 const app = express();
 
@@ -129,6 +130,10 @@ const authLimiter = rateLimit({
 });
 app.use('/api/auth/', authLimiter);
 
+// ─── Stripe Webhook (MUST be before express.json()) ─────────
+// The webhook endpoint uses express.raw() internally for signature verification
+app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }));
+
 // ─── Body Parsing ────────────────────────────────────────────
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -164,6 +169,7 @@ app.use('/api/f', publicRoutes);
 app.use('/api/verify', verifyRoutes);
 app.use('/api/superadmin', superAdminRoutes);
 app.use('/api/public', publicStatsRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 // ─── 404 Handler ─────────────────────────────────────────────
 app.all('*', (req, res, next) => {

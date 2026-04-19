@@ -30,6 +30,8 @@ const formFieldSchema = new mongoose.Schema(
           'file',
           'url',
           'address',
+          'video',
+          'page_break',
         ],
         message: 'Invalid field type',
       },
@@ -120,6 +122,11 @@ const formSchema = new mongoose.Schema(
       fontFamily: { type: String, default: '' },
       showOrgLogo: { type: Boolean, default: true },
       customCSS: { type: String, default: '' },
+      socialLinks: {
+        youtube: { type: String, default: '' },
+        tiktok: { type: String, default: '' },
+        instagram: { type: String, default: '' },
+      },
     },
     template: {
       isTemplate: { type: Boolean, default: false },

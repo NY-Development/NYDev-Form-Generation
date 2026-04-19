@@ -15,6 +15,22 @@ export interface GetUsersParams {
   role?: string;
 }
 
+export interface GetAuditLogsParams {
+  page?: number;
+  limit?: number;
+  action?: string;
+  severity?: string;
+  search?: string;
+}
+
+export interface GetTicketsParams {
+  page?: number;
+  limit?: number;
+  status?: string;
+  priority?: string;
+  search?: string;
+}
+
 export const superadminService = {
   getOrganizations: (params?: GetOrgsParams) =>
     api.get('/superadmin/organizations', { params }) as Promise<PaginatedResponse<Organization>>,
@@ -30,4 +46,17 @@ export const superadminService = {
 
   updateOrgSubscription: (orgId: string, plan: string) =>
     api.put(`/superadmin/organizations/${orgId}/subscription`, { plan }) as Promise<ApiResponse<{ subscription: Subscription }>>,
+
+  getAuditLogs: (params?: GetAuditLogsParams) =>
+    api.get('/superadmin/audit-logs', { params }) as Promise<any>,
+
+  getSupportTickets: (params?: GetTicketsParams) =>
+    api.get('/superadmin/support-tickets', { params }) as Promise<any>,
+
+  createSupportTicket: (data: { title: string; description: string; priority?: string; organizationName?: string }) =>
+    api.post('/superadmin/support-tickets', data) as Promise<any>,
+
+  updateSupportTicket: (id: string, data: any) =>
+    api.put(`/superadmin/support-tickets/${id}`, data) as Promise<any>,
 };
+

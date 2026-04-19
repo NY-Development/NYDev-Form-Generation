@@ -95,6 +95,10 @@ userSchema.pre('save', async function (next) {
  * @returns {Promise<boolean>}
  */
 userSchema.methods.matchPassword = async function (candidatePassword) {
+  // Guard against users without a password (e.g. Google OAuth accounts)
+  if (!this.password) {
+    return false;
+  }
   return await bcrypt.compare(candidatePassword, this.password);
 };
 

@@ -150,22 +150,40 @@ export const FormView = () => {
           {/* Event Hero */}
           <div className="overflow-hidden rounded-xl border border-border bg-card shadow-lg">
             <div
-              className={`relative flex ${form?.branding?.headerImage ? 'h-64 items-center justify-center' : 'h-48 items-end'} w-full p-8`}
-              style={{ backgroundColor: form?.branding?.primaryColor || '#3b82f6' }}
+              className={`relative flex w-full p-8 min-h-[16rem] items-end`}
+              style={form?.branding?.headerImage ? { backgroundImage: `url(${form.branding.headerImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : { backgroundColor: form?.branding?.primaryColor || '#3b82f6' }}
             >
-              {form?.branding?.headerImage ? (
-                <img 
-                  src={form.branding.headerImage} 
-                  alt="Form Logo" 
-                  className="z-10 max-h-48 max-w-full object-contain filter drop-shadow-md" 
-                />
-              ) : (
-                <div className="relative z-10 text-white">
-                  <h1 className="mb-2 text-4xl font-black leading-tight tracking-tight text-white/90 drop-shadow-sm">
+              {form?.branding?.headerImage && (
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+              )}
+              
+              <div className="relative z-10 w-full flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
+                <div className="text-white">
+                  <h1 className="mb-2 text-4xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
                     {form?.title || 'Untitled Form'}
                   </h1>
                 </div>
-              )}
+
+                {(form?.branding?.socialLinks?.youtube || form?.branding?.socialLinks?.tiktok || form?.branding?.socialLinks?.instagram) && (
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-2 rounded-xl border border-white/20 shadow-sm">
+                    {form?.branding?.socialLinks?.youtube && (
+                      <a href={form.branding.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">video_library</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.tiktok && (
+                      <a href={form.branding.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">movie</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.instagram && (
+                      <a href={form.branding.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">photo_camera</span>
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
             {form?.description && (
               <div className="p-8">
@@ -187,6 +205,7 @@ export const FormView = () => {
                 values={values}
                 onChange={handleChange}
                 errors={errors}
+                enablePagination={true}
               />
             ) : (
               <div className="py-8 text-center text-muted-foreground">

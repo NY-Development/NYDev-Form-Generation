@@ -36,6 +36,11 @@ const organizationSchema = new mongoose.Schema(
       logo: { type: String, default: '' },
       favicon: { type: String, default: '' },
       fontFamily: { type: String, default: 'Inter' },
+      socialLinks: {
+        youtube: { type: String, default: '' },
+        tiktok: { type: String, default: '' },
+        instagram: { type: String, default: '' },
+      },
     },
     settings: {
       defaultFormApproval: { type: Boolean, default: false },
@@ -49,6 +54,10 @@ const organizationSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    stripeCustomerId: {
+      type: String,
+      default: null,
     },
   },
   {

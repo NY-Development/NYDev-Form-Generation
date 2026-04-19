@@ -28,6 +28,9 @@ import BillingPage from '../pages/dashboard/BillingPage';
 import SuperAdminOverview from '../pages/superadmin/Overview';
 import SuperAdminOrgs from '../pages/superadmin/Organizations';
 import SuperAdminUsers from '../pages/superadmin/Users';
+import AuditLogs from '../pages/superadmin/AuditLogs';
+import AdminSettings from '../pages/superadmin/AdminSettings';
+import SupportHub from '../pages/superadmin/SupportHub';
 
 export const AppRouter = () => {
   return (
@@ -62,7 +65,10 @@ export const AppRouter = () => {
         <Route element={<SuperAdminRoute />}>
           <Route path="/superadmin" element={<SuperAdminLayout title="Platform Overview"><SuperAdminOverview /></SuperAdminLayout>} />
           <Route path="/superadmin/organizations" element={<SuperAdminLayout title="Organizations"><SuperAdminOrgs /></SuperAdminLayout>} />
-          <Route path="/superadmin/users" element={<SuperAdminLayout title="Users"><SuperAdminUsers /></SuperAdminLayout>} />
+          <Route path="/superadmin/users" element={<SuperAdminLayout title="Users & Roles"><SuperAdminUsers /></SuperAdminLayout>} />
+          <Route path="/superadmin/logs" element={<SuperAdminLayout title="Audit Logs"><AuditLogs /></SuperAdminLayout>} />
+          <Route path="/superadmin/settings" element={<SuperAdminLayout title="Global Settings"><AdminSettings /></SuperAdminLayout>} />
+          <Route path="/superadmin/support" element={<SuperAdminLayout title="Support Hub"><SupportHub /></SuperAdminLayout>} />
         </Route>
 
         {/* ─── 404 Fallback ──────────────────────────────── */}

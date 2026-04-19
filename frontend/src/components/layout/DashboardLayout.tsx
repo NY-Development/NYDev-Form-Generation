@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
@@ -17,6 +18,9 @@ import {
   Menu,
 } from 'lucide-react';
 import { useUiStore } from '../../store/ui.store';
+import { SearchDialog } from '../common/SearchDialog';
+import { NotificationsPanel } from '../common/NotificationsPanel';
+import { HelpPanel } from '../common/HelpPanel';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -26,6 +30,9 @@ interface DashboardLayoutProps {
 export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayoutProps) => {
   const { user, organization, logout } = useAuth();
   const { theme, toggleTheme, sidebarOpen, toggleSidebar } = useUiStore();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   const navItems = [
     { label: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/dashboard' },
@@ -104,7 +111,7 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
       {/* Main Content */}
       <main className="relative flex h-full flex-1 flex-col overflow-hidden">
         {/* Header */}
-        <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-border bg-card px-6">
+        <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-border bg-card/80 backdrop-blur-md px-6 shadow-sm">
           <div className="flex items-center gap-4">
             <button onClick={toggleSidebar} className="p-1 text-muted-foreground transition-colors hover:text-foreground">
               <Menu size={24} />
@@ -113,14 +120,16 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
           </div>
           <div className="flex items-center gap-4">
             {/* Search */}
-            <div className="relative hidden h-10 w-64 items-center overflow-hidden rounded-lg bg-muted transition-all focus-within:ring-2 focus-within:ring-primary/50 md:flex">
+            <div className="relative hidden h-10 w-64 items-center overflow-hidden rounded-lg bg-muted transition-all focus-within:ring-2 focus-within:ring-primary/50 md:flex cursor-pointer" onClick={() => setSearchOpen(true)}>
               <div className="flex items-center justify-center pl-3 text-muted-foreground">
                 <Search size={20} />
               </div>
               <input
-                className="h-full w-full border-none bg-transparent px-2 text-sm text-foreground placeholder:text-muted-foreground focus:ring-0 outline-none"
+                className="h-full w-full border-none bg-transparent px-2 text-sm text-foreground placeholder:text-muted-foreground focus:ring-0 outline-none cursor-pointer"
                 placeholder="Search forms, data..."
                 type="text"
+                readOnly
+                onClick={() => setSearchOpen(true)}
               />
             </div>
             {/* Actions */}
@@ -128,11 +137,11 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
               <button onClick={toggleTheme} className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <button className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
+              <button onClick={() => { setNotifOpen(!notifOpen); setHelpOpen(false); }} className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
                 <Bell size={20} />
                 <span className="absolute right-2 top-2 size-2 rounded-full border-2 border-card bg-red-500"></span>
               </button>
-              <button className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
+              <button onClick={() => { setHelpOpen(!helpOpen); setNotifOpen(false); }} className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted">
                 <HelpCircle size={20} />
               </button>
               <div className="mx-1 h-8 w-px bg-border"></div>
@@ -165,6 +174,11 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
           {children}
         </div>
       </main>
+
+      {/* Shared panels */}
+      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <NotificationsPanel open={notifOpen} onClose={() => setNotifOpen(false)} />
+      <HelpPanel open={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   );
 };

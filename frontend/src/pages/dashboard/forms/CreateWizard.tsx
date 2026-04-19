@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, CloudUpload, Share2, Plus, Trash2, GripVertical } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CloudUpload, Share2, Plus, Trash2, GripVertical, SeparatorHorizontal, Video, Lock } from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
 import { formService } from '../../../services/form.service';
 import { toast } from 'sonner';
 import type { FormField, FieldType } from '../../../types';
 
-const FIELD_TYPES: { type: FieldType; label: string }[] = [
+const FIELD_TYPES: { type: FieldType; label: string; icon?: React.ReactNode; pro?: boolean }[] = [
   { type: 'text', label: 'Short Text' },
   { type: 'textarea', label: 'Long Text' },
   { type: 'email', label: 'Email' },
@@ -19,6 +19,8 @@ const FIELD_TYPES: { type: FieldType; label: string }[] = [
   { type: 'time', label: 'Time' },
   { type: 'url', label: 'URL' },
   { type: 'address', label: 'Address' },
+  { type: 'page_break', label: 'Page Break', icon: <SeparatorHorizontal size={16} className="text-amber-500" /> },
+  { type: 'video', label: 'Video Upload', icon: <Video size={16} className="text-purple-500" />, pro: true },
 ];
 
 export const CreateWizard = () => {
@@ -36,7 +38,11 @@ export const CreateWizard = () => {
     description: '',
     primaryColor: '#1152d4',
     headerImage: '',
+    youtube: '',
+    tiktok: '',
+    instagram: '',
   });
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [fields, setFields] = useState<FormField[]>([]);
   const [savedFormId, setSavedFormId] = useState(editId || '');
   const [saving, setSaving] = useState(false);
@@ -46,7 +52,15 @@ export const CreateWizard = () => {
     if (editId && orgId) {
       formService.getForm(orgId, editId).then((res) => {
         const form = res.data.form || res.data;
-        setFormData({ title: form.title, description: form.description, primaryColor: form.branding?.primaryColor || '#1152d4', headerImage: form.branding?.headerImage || '' });
+        setFormData({ 
+          title: form.title, 
+          description: form.description, 
+          primaryColor: form.branding?.primaryColor || '#1152d4', 
+          headerImage: form.branding?.headerImage || '',
+          youtube: form.branding?.socialLinks?.youtube || '',
+          tiktok: form.branding?.socialLinks?.tiktok || '',
+          instagram: form.branding?.socialLinks?.instagram || ''
+        });
         setFields(form.fields || []);
         setSavedFormId(editId);
       }).catch((err: any) => toast.error(err.message || 'Failed to load form'));
@@ -73,7 +87,15 @@ export const CreateWizard = () => {
         toast.success('Form created!');
       }
       nextStep();
-    } catch (err: any) { toast.error(err.message || 'Failed to save'); }
+    } catch (err: any) { 
+      const msg = err.message || 'Failed to save';
+      if ((msg.toLowerCase().includes('maximum number') || msg.toLowerCase().includes('limit')) && 
+          (!organization?.subscription || (organization.subscription as any)?.plan === 'free')) {
+        setShowUpgradeModal(true);
+      } else {
+        toast.error(msg); 
+      }
+    }
     finally { setSaving(false); }
   };
 
@@ -81,11 +103,11 @@ export const CreateWizard = () => {
   const addField = (type: FieldType) => {
     const newField: FormField = {
       fieldId: `field_${Date.now()}`,
-      label: `New ${type} field`,
+      label: type === 'page_break' ? 'Page Break' : type === 'video' ? 'Video Upload' : `New ${type} field`,
       type,
-      required: false,
+      required: type === 'page_break' ? false : false,
       order: fields.length,
-      placeholder: '',
+      placeholder: type === 'page_break' ? '' : '',
       options: ['select', 'radio', 'checkbox'].includes(type) ? [{ label: 'Option 1', value: 'option_1' }] : undefined,
     };
     setFields([...fields, newField]);
@@ -127,7 +149,12 @@ export const CreateWizard = () => {
       await formService.updateForm(orgId, savedFormId, { 
         branding: { 
           primaryColor: formData.primaryColor,
-          headerImage: formData.headerImage 
+          headerImage: formData.headerImage,
+          socialLinks: {
+            youtube: formData.youtube,
+            tiktok: formData.tiktok,
+            instagram: formData.instagram
+          }
         } as any 
       });
       toast.success('Branding saved!');
@@ -235,10 +262,13 @@ export const CreateWizard = () => {
                 <button
                   key={ft.type}
                   onClick={() => addField(ft.type)}
-                  className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 text-sm font-medium text-foreground shadow-sm transition-all hover:border-primary hover:shadow-md"
+                  className={`flex items-center gap-3 rounded-lg border bg-card p-3 text-sm font-medium text-foreground shadow-sm transition-all hover:shadow-md ${
+                    ft.type === 'page_break' ? 'border-amber-500/30 hover:border-amber-500' : ft.pro ? 'border-purple-500/30 hover:border-purple-500' : 'border-border hover:border-primary'
+                  }`}
                 >
-                  <Plus size={16} className="text-muted-foreground" />
+                  {ft.icon || <Plus size={16} className="text-muted-foreground" />}
                   {ft.label}
+                  {ft.pro && <Lock size={12} className="ml-auto text-amber-500" />}
                 </button>
               ))}
             </div>
@@ -267,9 +297,27 @@ export const CreateWizard = () => {
               ) : (
                 <div className="flex flex-col gap-4">
                   {fields.map((field, idx) => (
-                    <div key={field.fieldId} className="rounded-lg border border-border bg-card p-5 shadow-sm">
+                    field.type === 'page_break' ? (
+                      /* ── Page Break Visual Divider ── */
+                      <div key={field.fieldId} className="relative flex items-center gap-4 py-2">
+                        <div className="flex-1 border-t-2 border-dashed border-amber-500/40" />
+                        <div className="flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-50 dark:bg-amber-950/30 px-4 py-1.5">
+                          <SeparatorHorizontal size={14} className="text-amber-600" />
+                          <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">Page Break</span>
+                        </div>
+                        <div className="flex-1 border-t-2 border-dashed border-amber-500/40" />
+                        <button onClick={() => removeField(field.fieldId)} className="absolute -right-1 -top-1 text-muted-foreground hover:text-destructive">
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ) : (
+                    <div key={field.fieldId} className={`rounded-lg border bg-card p-5 shadow-sm ${field.type === 'video' ? 'border-purple-500/30' : 'border-border'}`}>
                       <div className="mb-3 flex items-center justify-between">
-                        <span className="text-xs font-medium text-muted-foreground uppercase">{field.type} · #{idx + 1}</span>
+                        <div className="flex items-center gap-2">
+                          {field.type === 'video' && <Video size={14} className="text-purple-500" />}
+                          <span className="text-xs font-medium text-muted-foreground uppercase">{field.type} · #{idx + 1}</span>
+                          {field.type === 'video' && <span className="rounded bg-purple-100 dark:bg-purple-900/30 px-1.5 py-0.5 text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase">Pro</span>}
+                        </div>
                         <button onClick={() => removeField(field.fieldId)} className="text-muted-foreground hover:text-destructive">
                           <Trash2 size={16} />
                         </button>
@@ -292,6 +340,11 @@ export const CreateWizard = () => {
                           />
                         </div>
                       </div>
+                      {field.type === 'video' && (
+                        <div className="mt-3 rounded-lg border border-dashed border-purple-500/30 bg-purple-50/50 dark:bg-purple-950/20 p-3">
+                          <p className="text-xs text-purple-600 dark:text-purple-400">📹 Respondents can record or upload a video (max 3 minutes). Requires Pro plan.</p>
+                        </div>
+                      )}
                       <label className="mt-3 flex items-center gap-2 cursor-pointer">
                         <input
                           type="checkbox"
@@ -322,6 +375,7 @@ export const CreateWizard = () => {
                         </div>
                       )}
                     </div>
+                    )
                   ))}
                 </div>
               )}
@@ -397,6 +451,27 @@ export const CreateWizard = () => {
                 </div>
               </div>
             </div>
+            <div className="flex flex-col gap-5 mt-4 pt-6 border-t border-border">
+              <h2 className="border-b border-border pb-2 text-lg font-bold tracking-tight text-foreground">Social Media Links</h2>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">YouTube</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://youtube.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.youtube} onChange={e => setFormData({...formData, youtube: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">TikTok</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://tiktok.com/@..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.tiktok} onChange={e => setFormData({...formData, tiktok: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">Instagram</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://instagram.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.instagram} onChange={e => setFormData({...formData, instagram: e.target.value})} />
+                </div>
+              </div>
+            </div>
             <div className="mt-auto flex gap-4 pt-6">
               <button onClick={prevStep} className="flex-1 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-muted">Back</button>
               <button onClick={handleSaveBranding} disabled={saving} className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 disabled:opacity-50">
@@ -430,6 +505,18 @@ export const CreateWizard = () => {
                     </button>
                   </div>
                 </div>
+                {(!organization?.subscription || (organization.subscription as any)?.plan === 'free') && (
+                  <div className="bg-muted/30 p-4 border-t border-border flex justify-center items-center gap-3">
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <span className="material-symbols-outlined text-[16px]">bolt</span>
+                      <span className="text-xs font-medium">Powered by <span className="font-bold text-foreground">NYDev Platform</span></span>
+                    </div>
+                    <div className="h-4 w-px bg-border"></div>
+                    <button onClick={() => navigate('/dashboard/billing')} className="text-[10px] bg-muted hover:bg-muted/80 text-foreground px-2.5 py-1 rounded font-semibold transition-colors uppercase tracking-wide">
+                      Upgrade to Remove
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -456,6 +543,25 @@ export const CreateWizard = () => {
               </button>
               <button onClick={handlePublish} disabled={saving} className="rounded-lg bg-primary px-8 py-2.5 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 disabled:opacity-50">
                 {saving ? 'Publishing...' : 'Publish Form'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Footer / Modals */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md bg-card rounded-xl p-8 shadow-2xl border border-border">
+            <h3 className="text-xl font-bold mb-2 text-foreground">Upgrade to Pro</h3>
+            <p className="text-muted-foreground mb-6">
+              You have reached the maximum number of custom forms for your current plan. Upgrade to Pro to create unlimited forms and unlock premium features.
+            </p>
+            <div className="flex justify-end gap-3">
+              <button onClick={() => setShowUpgradeModal(false)} className="px-4 py-2 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-muted">
+                Cancel
+              </button>
+              <button onClick={() => navigate('/dashboard/billing')} className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90">
+                Upgrade Now
               </button>
             </div>
           </div>

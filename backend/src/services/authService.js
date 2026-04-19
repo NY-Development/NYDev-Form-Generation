@@ -5,6 +5,9 @@ const AppError = require('../utils/AppError');
 const { OAuth2Client } = require('google-auth-library');
 const env = require('../config/env');
 
+// Emails that automatically get superadmin privileges
+const SUPERADMIN_EMAILS = ['yamlaknegash96@gmail.com'];
+
 const client = new OAuth2Client(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
@@ -95,6 +98,10 @@ const login = async ({ email, password }) => {
 
   // Update last login
   user.lastLogin = new Date();
+  // Auto-promote to superadmin if email matches
+  if (SUPERADMIN_EMAILS.includes(user.email) && user.role !== 'superadmin') {
+    user.role = 'superadmin';
+  }
   await user.save({ validateBeforeSave: false });
 
   // Generate token
@@ -137,6 +144,10 @@ const googleLogin = async ({ code }) => {
     user.lastLogin = new Date();
     if (picture && !user.avatar) {
       user.avatar = picture;
+    }
+    // Auto-promote to superadmin if email matches
+    if (SUPERADMIN_EMAILS.includes(user.email) && user.role !== 'superadmin') {
+      user.role = 'superadmin';
     }
     await user.save({ validateBeforeSave: false });
     organization = await Organization.findOne({ owner: user._id });
