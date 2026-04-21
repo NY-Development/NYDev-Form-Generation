@@ -168,12 +168,12 @@ export const FormView = () => {
                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-2 rounded-xl border border-white/20 shadow-sm">
                     {form?.branding?.socialLinks?.youtube && (
                       <a href={form.branding.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">video_library</span>
+                        <span className="material-symbols-outlined text-xl">smart_display</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.tiktok && (
                       <a href={form.branding.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">movie</span>
+                        <span className="material-symbols-outlined text-xl">music_note</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.instagram && (
@@ -188,27 +188,27 @@ export const FormView = () => {
                     )}
                     {form?.branding?.socialLinks?.twitter && (
                       <a href={form.branding.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">twitter</span>
+                        <span className="material-symbols-outlined text-xl">close</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.linkedin && (
                       <a href={form.branding.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">linkedin</span>
+                        <span className="material-symbols-outlined text-xl">work</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.whatsapp && (
                       <a href={form.branding.socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">whatsapp</span>
+                        <span className="material-symbols-outlined text-xl">chat</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.telegram && (
                       <a href={form.branding.socialLinks.telegram} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">telegram</span>
+                        <span className="material-symbols-outlined text-xl">send</span>
                       </a>
                     )}
                     {form?.branding?.socialLinks?.other && (
                       <a href={form.branding.socialLinks.other} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
-                        <span className="material-symbols-outlined text-xl">other</span>
+                        <span className="material-symbols-outlined text-xl">link</span>
                       </a>
                     )}
                   </div>
