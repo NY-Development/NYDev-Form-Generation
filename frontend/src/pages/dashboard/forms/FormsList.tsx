@@ -33,7 +33,17 @@ export const FormsList = () => {
     }
   }, [orgId, page, search, statusFilter]);
 
-  useEffect(() => { fetchForms(); }, [fetchForms]);
+  useEffect(() => { 
+    // Force a reload on initial navigation to ensure fresh data fetching
+    const hasReloaded = sessionStorage.getItem('forms_reloaded');
+    if (!hasReloaded) {
+      sessionStorage.setItem('forms_reloaded', 'true');
+      window.location.reload();
+    } else {
+      setTimeout(() => sessionStorage.removeItem('forms_reloaded'), 1000);
+      fetchForms(); 
+    }
+  }, [fetchForms]);
 
   const handlePublish = async (formId: string) => {
     try {

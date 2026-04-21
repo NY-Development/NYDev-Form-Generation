@@ -15,8 +15,8 @@ router.post(
   '/:slug/submit',
   [
     body('responses').notEmpty().withMessage('Form responses are required'),
-    body('submitterEmail').optional().isEmail().withMessage('Please provide a valid email'),
-    body('submitterName').optional().trim(),
+    body('submitterEmail').optional({ checkFalsy: true }).isEmail().withMessage('Please provide a valid email'),
+    body('submitterName').optional({ checkFalsy: true }).trim(),
   ],
   validate,
   publicController.submitPublicForm

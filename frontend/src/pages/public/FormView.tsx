@@ -69,11 +69,11 @@ export const FormView = () => {
       const submitterEmail = emailField ? (values[emailField.fieldId] as string) : '';
       const submitterName = nameFields?.map((f: FormField) => values[f.fieldId]).filter(Boolean).join(' ') || '';
 
-      const res = await publicService.submitPublicForm(slug, {
-        responses: values,
-        submitterEmail,
-        submitterName,
-      });
+      const payload: any = { responses: values };
+      if (submitterEmail) payload.submitterEmail = submitterEmail;
+      if (submitterName) payload.submitterName = submitterName;
+
+      const res = await publicService.submitPublicForm(slug, payload);
 
       toast.success('Registration submitted successfully!');
       navigate(`/f/${slug}/success`, {
