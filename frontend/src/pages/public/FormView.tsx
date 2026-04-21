@@ -181,6 +181,36 @@ export const FormView = () => {
                         <span className="material-symbols-outlined text-xl">photo_camera</span>
                       </a>
                     )}
+                    {form?.branding?.socialLinks?.facebook && (
+                      <a href={form.branding.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">facebook</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.twitter && (
+                      <a href={form.branding.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">twitter</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.linkedin && (
+                      <a href={form.branding.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">linkedin</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.whatsapp && (
+                      <a href={form.branding.socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">whatsapp</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.telegram && (
+                      <a href={form.branding.socialLinks.telegram} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">telegram</span>
+                      </a>
+                    )}
+                    {form?.branding?.socialLinks?.other && (
+                      <a href={form.branding.socialLinks.other} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/10">
+                        <span className="material-symbols-outlined text-xl">other</span>
+                      </a>
+                    )}
                   </div>
                 )}
               </div>

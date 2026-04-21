@@ -41,6 +41,12 @@ export const CreateWizard = () => {
     youtube: '',
     tiktok: '',
     instagram: '',
+    facebook: '',
+    twitter: '',
+    linkedin: '',
+    whatsapp: '',
+    telegram: '',
+    other: '',
   });
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [fields, setFields] = useState<FormField[]>([]);
@@ -59,7 +65,13 @@ export const CreateWizard = () => {
           headerImage: form.branding?.headerImage || '',
           youtube: form.branding?.socialLinks?.youtube || '',
           tiktok: form.branding?.socialLinks?.tiktok || '',
-          instagram: form.branding?.socialLinks?.instagram || ''
+          instagram: form.branding?.socialLinks?.instagram || '',
+          facebook: form.branding?.socialLinks?.facebook || '',
+          twitter: form.branding?.socialLinks?.twitter || '',
+          linkedin: form.branding?.socialLinks?.linkedin || '',
+          whatsapp: form.branding?.socialLinks?.whatsapp || '',
+          telegram: form.branding?.socialLinks?.telegram || '',
+          other: form.branding?.socialLinks?.other || '',
         });
         setFields(form.fields || []);
         setSavedFormId(editId);
@@ -153,7 +165,13 @@ export const CreateWizard = () => {
           socialLinks: {
             youtube: formData.youtube,
             tiktok: formData.tiktok,
-            instagram: formData.instagram
+            instagram: formData.instagram,
+            facebook: formData.facebook,
+            twitter: formData.twitter,
+            linkedin: formData.linkedin,
+            whatsapp: formData.whatsapp,
+            telegram: formData.telegram,
+            other: formData.other,
           }
         } as any 
       });
@@ -469,6 +487,42 @@ export const CreateWizard = () => {
                 <label className="text-sm font-medium text-foreground">Instagram</label>
                 <div className="relative">
                   <input type="url" placeholder="https://instagram.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.instagram} onChange={e => setFormData({...formData, instagram: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">Facebook</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://facebook.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.facebook} onChange={e => setFormData({...formData, facebook: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">Twitter</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://twitter.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.twitter} onChange={e => setFormData({...formData, twitter: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">LinkedIn</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://linkedin.com/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">WhatsApp</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://wa.me/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">Telegram</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://t.me/..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.telegram} onChange={e => setFormData({...formData, telegram: e.target.value})} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-medium text-foreground">Other</label>
+                <div className="relative">
+                  <input type="url" placeholder="https://..." className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary" value={formData.other} onChange={e => setFormData({...formData, other: e.target.value})} />
                 </div>
               </div>
             </div>

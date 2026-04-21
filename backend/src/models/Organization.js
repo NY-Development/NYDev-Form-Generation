@@ -40,6 +40,12 @@ const organizationSchema = new mongoose.Schema(
         youtube: { type: String, default: '' },
         tiktok: { type: String, default: '' },
         instagram: { type: String, default: '' },
+        facebook: { type: String, default: '' },
+        twitter: { type: String, default: '' },
+        linkedin: { type: String, default: '' },
+        whatsapp: { type: String, default: '' },
+        telegram: { type: String, default: '' },
+        other: { type: String, default: '' },
       },
     },
     settings: {

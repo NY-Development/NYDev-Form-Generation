@@ -64,6 +64,12 @@ export interface OrgBranding {
     youtube?: string;
     tiktok?: string;
     instagram?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    whatsapp?: string;
+    telegram?: string;
+    other?: string;
   };
 }
 
@@ -158,6 +164,12 @@ export interface FormBranding {
     youtube?: string;
     tiktok?: string;
     instagram?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    whatsapp?: string;
+    telegram?: string;
+    other?: string;
   };
 }
 
