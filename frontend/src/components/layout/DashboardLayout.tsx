@@ -94,7 +94,7 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
         </div>
 
         {/* Pro Up-sell banner */}
-        <div className="mt-auto p-6">
+        <div className="mt-auto p-4">
           <div className="rounded-xl border border-primary/10 bg-linear-to-br from-primary/10 to-primary/5 p-4">
             <div className="mb-2 flex items-center gap-2 text-primary">
               <Gem size={20} />
@@ -104,6 +104,12 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
             <button className="flex h-9 w-full items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-sm transition-all hover:bg-primary/90">
               Upgrade to Pro
             </button>
+          </div>
+          <div 
+            onClick={logout}
+            className="flex items-center justify-center gap-2 px-3 py-2 mt-2 hover:bg-muted rounded text-sm text-destructive cursor-pointer"
+          >
+            <LogOut size={16} /> Logout
           </div>
         </div>
       </aside>
