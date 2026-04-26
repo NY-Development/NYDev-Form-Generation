@@ -135,12 +135,12 @@ export const FormView = () => {
           </div>
           <h2 className="text-xl font-bold leading-tight tracking-tight text-foreground">{orgName}</h2>
         </div>
-        <button
+        {/* <button
           onClick={() => navigate('/login')}
           className="flex h-10 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
         >
           Login
-        </button>
+        </button> */}
       </header>
 
       {/* Main Content */}
