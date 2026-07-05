@@ -2,6 +2,7 @@ const express = require('express');
 const { body } = require('express-validator');
 const validate = require('../middleware/validate');
 const formController = require('../controllers/formController');
+const updateController = require('../controllers/updateController'); // Added update controller
 const { protect, authorize, orgAccess } = require('../middleware/auth');
 
 const router = express.Router();
@@ -60,5 +61,21 @@ router.put('/:orgId/forms/:formId/close', orgAccess, formController.closeForm);
 
 // @route   POST /api/organizations/:orgId/forms/from-template/:templateId
 router.post('/:orgId/forms/from-template/:templateId', orgAccess, formController.cloneFromTemplate);
+
+/**
+ * Broadcast Email Updates
+ * @route   POST /api/organizations/:orgId/forms/:formId/send-update
+ * @access  Private (Form Organizer via orgAccess check)
+ */
+router.post(
+  '/:orgId/forms/:formId/send-update',
+  orgAccess,
+  [
+    body('subject').trim().notEmpty().withMessage('Email subject is required'),
+    body('message').trim().notEmpty().withMessage('Email message content is required'),
+  ],
+  validate,
+  updateController.sendFormUpdateEmail
+);
 
 module.exports = router;

@@ -74,6 +74,28 @@ const submitPublicForm = async (req, res, next) => {
       },
     });
 
+    // Asynchronously send a confirmation email if the submitter provided an email address
+    if (submitterEmail) {
+      (async () => {
+        try {
+          const { sendEmail } = await import('../utils/Email.js');
+          
+          const orgName = form.organizationId?.name || 'Organizer';
+          const formTitle = form.title || 'Form Submission';
+          
+          // Fallback to support email if creator details are not populated on the organization object
+          const orgCreatorEmail = form.organizationId?.creatorId?.email || form.organizationId?.email || 'support@nydev.app';
+
+          const subject = `Registration Successful: ${formTitle}`;
+          const text = `Dear ${submitterName || 'Participant'},\n\nThank you for registering! We have successfully received your submission.\n\nThe organizer will contact you using this email address (${submitterEmail}) for further updates. Please keep an eye on your inbox for upcoming announcements.\n\nBest regards,\n${orgName} Team`;
+
+          await sendEmail(submitterEmail, subject, text, orgName, formTitle, orgCreatorEmail);
+        } catch (emailError) {
+          console.error('[Email Worker Error] Failed to send registration confirmation email:', emailError);
+        }
+      })();
+    }
+
     sendSuccess(res, {
       submission: {
         id: submission._id,
