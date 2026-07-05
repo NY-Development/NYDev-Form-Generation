@@ -3,6 +3,9 @@ import { createLogger, format, transports } from 'winston';
 // Determine if we are running in a development environment
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+// Check if running in a serverless environment (like AWS Lambda, Vercel, etc.)
+const isServerless = !!process.env.LAMBDA_TASK_ROOT || !!process.env.VERCEL;
+
 /**
  * Custom log format combining timestamps, colors, and clean error stack traces
  */
@@ -29,18 +32,18 @@ export const logger = createLogger({
   format: customFormat,
   defaultMeta: { service: 'nydev-form-service' },
   transports: [
-    // Standard error output file tracking
-    new transports.File({ filename: 'logs/error.log', level: 'error' }),
-    // Full operational logs capture
-    new transports.File({ filename: 'logs/combined.log' }),
+    // Always log to the console in production/serverless so CloudWatch/Vercel captures it
+    new transports.Console({
+      format: isDevelopment ? consoleFormat : customFormat,
+    })
   ],
 });
 
-// Always direct logs directly to the live console during development or container execution
-if (isDevelopment || process.env.NODE_ENV !== 'production') {
-  logger.add(
-    new transports.Console({
-      format: consoleFormat,
-    })
-  );
+// File system writing is strictly reserved for local development environments
+if (isDevelopment && !isServerless) {
+  // Standard error output file tracking
+  logger.add(new transports.File({ filename: 'logs/error.log', level: 'error' }));
+  
+  // Full operational logs capture
+  logger.add(new transports.File({ filename: 'logs/combined.log' }));
 }
