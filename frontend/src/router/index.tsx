@@ -23,6 +23,7 @@ import FormSubmissions from '../pages/dashboard/forms/AdminList';
 import SubmissionDetail from '../pages/dashboard/forms/SubmissionDetail';
 import SettingsPage from '../pages/dashboard/SettingsPage';
 import BillingPage from '../pages/dashboard/BillingPage';
+import EmailReply from '../pages/dashboard/EmailReply';
 
 // Pages — SuperAdmin
 import SuperAdminOverview from '../pages/superadmin/Overview';
@@ -59,6 +60,7 @@ export const AppRouter = () => {
           <Route path="/dashboard/forms/:id/submissions/:subId" element={<DashboardLayout title="Submission Detail"><SubmissionDetail /></DashboardLayout>} />
           <Route path="/dashboard/settings" element={<DashboardLayout title="Settings"><SettingsPage /></DashboardLayout>} />
           <Route path="/dashboard/billing" element={<DashboardLayout title="Billing"><BillingPage /></DashboardLayout>} />
+          <Route path="/dashboard/email-reply" element={<DashboardLayout title="Email Reply"><EmailReply /></DashboardLayout>} />
         </Route>
 
         {/* ─── SuperAdmin Routes (superadmin only) ────────── */}

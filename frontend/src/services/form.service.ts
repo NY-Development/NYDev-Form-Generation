@@ -18,6 +18,23 @@ export interface GetFormsParams {
   search?: string;
 }
 
+export interface SendUpdatePayload {
+  subject: string;
+  message: string;
+}
+
+export interface UpdateHistoryItem {
+  _id: string;
+  subject: string;
+  message: string;
+  recipientsCount: number;
+  createdAt: string;
+  senderId?: {
+    name: string;
+    email: string;
+  };
+}
+
 export const formService = {
   getForms: (orgId: string, params?: GetFormsParams) =>
     api.get(`/organizations/${orgId}/forms`, { params }) as Promise<PaginatedResponse<Form>>,
@@ -45,4 +62,23 @@ export const formService = {
 
   cloneTemplate: (orgId: string, templateId: string) =>
     api.post(`/organizations/${orgId}/forms/from-template/${templateId}`) as Promise<ApiResponse<{ form: Form }>>,
+};
+
+// Fetches the collection of unique registrants via the Axios routing client wrapper
+export const fetchFormRegistrants = async (orgId: string, formId: string): Promise<{ success: boolean; data: Array<{ email: string; name: string }> }> => {
+  return api.get(`/organizations/${orgId}/forms/${formId}/registrants`);
+};
+
+// Transmits the broadcast parameters payload via the Axios routing client wrapper
+export const broadcastFormUpdate = async (
+  orgId: string, 
+  formId: string, 
+  payload: { subject: string; message: string; targetScope: string; recipientEmails: string[] }
+): Promise<{ success: boolean; message: string }> => {
+  return api.post(`/organizations/${orgId}/forms/${formId}/send-update`, payload);
+};
+
+// Tracks the mailing telemetry transmission archive history logs
+export const fetchFormUpdatesHistory = async (orgId: string, formId: string): Promise<{ success: boolean; data: UpdateHistoryItem[] }> => {
+  return api.get(`/organizations/${orgId}/forms/${formId}/updates`);
 };

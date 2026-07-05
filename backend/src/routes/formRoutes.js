@@ -62,10 +62,14 @@ router.put('/:orgId/forms/:formId/close', orgAccess, formController.closeForm);
 // @route   POST /api/organizations/:orgId/forms/from-template/:templateId
 router.post('/:orgId/forms/from-template/:templateId', orgAccess, formController.cloneFromTemplate);
 
+// ... existing route declarations ...
+
+// @route   GET /api/organizations/:orgId/forms/:formId/registrants
+router.get('/:orgId/forms/:formId/registrants', orgAccess, updateController.getFormRegistrants);
+
 /**
  * Broadcast Email Updates
  * @route   POST /api/organizations/:orgId/forms/:formId/send-update
- * @access  Private (Form Organizer via orgAccess check)
  */
 router.post(
   '/:orgId/forms/:formId/send-update',
@@ -73,9 +77,14 @@ router.post(
   [
     body('subject').trim().notEmpty().withMessage('Email subject is required'),
     body('message').trim().notEmpty().withMessage('Email message content is required'),
+    body('targetScope').optional().isIn(['all', 'selected', 'single']),
+    body('recipientEmails').optional().isArray(),
   ],
   validate,
   updateController.sendFormUpdateEmail
 );
+
+// @route   GET /api/organizations/:orgId/forms/:formId/updates
+router.get('/:orgId/forms/:formId/updates', orgAccess, updateController.getFormUpdatesHistory);
 
 module.exports = router;

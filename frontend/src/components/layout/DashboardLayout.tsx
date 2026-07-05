@@ -16,6 +16,7 @@ import {
   Sun,
   Moon,
   Menu,
+  Mail
 } from 'lucide-react';
 import { useUiStore } from '../../store/ui.store';
 import { SearchDialog } from '../common/SearchDialog';
@@ -40,6 +41,8 @@ export const DashboardLayout = ({ children, title = 'Dashboard' }: DashboardLayo
     { label: 'Create Form', icon: <PlusSquare size={20} />, path: '/dashboard/forms/new' },
     { label: 'Billing', icon: <CreditCard size={20} />, path: '/dashboard/billing' },
     { label: 'Settings', icon: <Settings size={20} />, path: '/dashboard/settings' },
+    // Email reply for form registration confirmation for registered users page
+    { label: 'Email Reply', icon: <Mail size={20} />, path: '/dashboard/email-reply' },
   ];
 
   return (

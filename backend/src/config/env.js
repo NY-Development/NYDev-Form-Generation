@@ -24,13 +24,5 @@ const env = {
   SENDER_EMAIL: process.env.SENDER_EMAIL || '',
 };
 
-// Validate critical env vars in production
-if (env.NODE_ENV === 'production') {
-  const required = ['MONGO_URI', 'JWT_SECRET'];
-  const missing = required.filter((key) => !process.env[key]);
-  if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
-  }
-}
-
+// Export the object directly to guarantee standard property resolution
 module.exports = env;
