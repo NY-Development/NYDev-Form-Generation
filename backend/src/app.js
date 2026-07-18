@@ -42,6 +42,7 @@ const allowedOrigins = [
   "http://localhost:5173", // local dev
   "http://localhost:8081", // local mobile dev
   "https://nydev-form-generation.vercel.app", //deployed url
+  "https://nydevform.nydevofficial.org"
 ];
 
 app.use(
