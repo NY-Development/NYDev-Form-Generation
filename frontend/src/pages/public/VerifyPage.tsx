@@ -89,6 +89,18 @@ export const VerifyPage = () => {
                 <span className="text-muted-foreground">Name</span>
                 <span className="font-medium">{submission.submitterName}</span>
               </div>
+              {submission.submitterEmail && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Email</span>
+                  <span className="font-medium">{submission.submitterEmail}</span>
+                </div>
+              )}
+              {submission.submitterPhone && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Phone</span>
+                  <span className="font-medium">{submission.submitterPhone}</span>
+                </div>
+              )}
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">ID</span>
                 <span className="font-mono font-medium">{submission.uniqueId}</span>
