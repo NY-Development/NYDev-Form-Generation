@@ -25,6 +25,7 @@ const superAdminRoutes = require('./routes/superAdminRoutes');
 const brandingRoutes = require('./routes/brandingRoutes');
 const publicStatsRoutes = require('./routes/publicStatsRoutes');
 const stripeRoutes = require('./routes/stripeRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 
@@ -306,6 +307,7 @@ app.use('/api/verify', verifyRoutes);
 app.use('/api/superadmin', superAdminRoutes);
 app.use('/api/public', publicStatsRoutes);
 app.use('/api/stripe', stripeRoutes);
+app.use('/api/contact', contactRoutes);
 
 // ─── 404 Handler ─────────────────────────────────────────────
 app.all('*', (req, res, next) => {

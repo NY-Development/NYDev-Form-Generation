@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { QrCode, PlayCircle, Edit3, Palette, Settings, CheckCircle2, Check, Share2, Users, FileText, ShieldCheck, Building2 } from 'lucide-react';
 import { Navbar } from '../../components/layout/Navbar';
+import { Footer } from '../../components/layout/Footer';
 import { publicService } from '../../services/public.service';
 
 const Landing = () => {
@@ -11,6 +12,21 @@ const Landing = () => {
     publicService.getPublicStats()
       .then((res) => setStats(res.data.stats || res.data))
       .catch(() => {}); // Graceful fallback — stats stay at 0
+      
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    
+    return () => observer.disconnect();
   }, []);
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background">
@@ -134,7 +150,7 @@ const Landing = () => {
             </div>
 
             {/* How It Works Section */}
-            <div id="how-it-works" className="border-t border-dashed border-border py-16 md:py-24">
+            <div id="how-it-works" className="border-t border-dashed border-border py-16 md:py-24 reveal-on-scroll">
               <div className="mb-16 flex flex-col gap-4 text-center">
                 <span className="text-sm font-bold tracking-wider text-primary uppercase">Process</span>
                 <h2 className="text-3xl font-black leading-tight tracking-[-0.015em] text-foreground sm:text-4xl">
@@ -188,7 +204,7 @@ const Landing = () => {
             </div>
 
             {/* Live Platform Stats */}
-            <div className="border-t border-dashed border-border py-16 md:py-24">
+            <div className="border-t border-dashed border-border py-16 md:py-24 reveal-on-scroll">
               <div className="mb-16 flex flex-col gap-4 text-center">
                 <span className="text-sm font-bold tracking-wider text-primary uppercase">Trusted By Many</span>
                 <h2 className="text-3xl font-black leading-tight tracking-[-0.015em] text-foreground sm:text-4xl">
@@ -231,7 +247,7 @@ const Landing = () => {
             </div>
 
             {/* Pricing Preview Section */}
-            <div id="pricing" className="mb-20 py-10">
+            <div id="pricing" className="mb-20 py-10 reveal-on-scroll">
               <div className="mb-10 flex flex-col items-end justify-between gap-6 md:flex-row">
                 <div className="flex flex-col gap-2">
                   <span className="text-sm font-bold tracking-wider text-primary uppercase">Plans</span>
@@ -254,7 +270,7 @@ const Landing = () => {
                 <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
                   <h3 className="mb-2 text-lg font-bold text-card-foreground">Starter</h3>
                   <div className="mb-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-card-foreground">$0</span>
+                    <span className="text-4xl font-black text-card-foreground">0 ETB</span>
                     <span className="text-muted-foreground">/mo</span>
                   </div>
                   <p className="mb-6 text-sm text-muted-foreground">Perfect for small meetups and testing the waters.</p>
@@ -287,7 +303,7 @@ const Landing = () => {
                   </div>
                   <h3 className="mb-2 text-lg font-bold text-primary-foreground">Professional</h3>
                   <div className="mb-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-primary-foreground">$29</span>
+                    <span className="text-4xl font-black text-primary-foreground">2,500 ETB</span>
                     <span className="text-primary-foreground/80">/mo</span>
                   </div>
                   <p className="mb-6 text-sm text-primary-foreground/80">For professional event organizers.</p>
@@ -321,7 +337,7 @@ const Landing = () => {
                 <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
                   <h3 className="mb-2 text-lg font-bold text-card-foreground">Business</h3>
                   <div className="mb-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-card-foreground">$99</span>
+                    <span className="text-4xl font-black text-card-foreground">9,500 ETB</span>
                     <span className="text-muted-foreground">/mo</span>
                   </div>
                   <p className="mb-6 text-sm text-muted-foreground">Advanced features for large scale operations.</p>
@@ -351,70 +367,7 @@ const Landing = () => {
             </div>
 
             {/* Footer */}
-            <footer className="border-t border-border pb-8 pt-12">
-              <div className="mb-8 flex flex-col justify-between gap-8 md:flex-row">
-                <div className="flex max-w-sm flex-col gap-4">
-                  <div className="flex items-center gap-3 text-foreground">
-                    <div className="flex size-6 items-center justify-center rounded bg-primary text-primary-foreground">
-                      <QrCode className="h-4 w-4" />
-                    </div>
-                    <h3 className="text-lg font-bold">NYDev Form Generator</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    The smartest way to create forms and manage event entry with secure QR code technology.
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-8 text-sm md:grid-cols-3">
-                  <div className="flex flex-col gap-3">
-                    <h4 className="font-bold text-foreground">Product</h4>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Features
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Pricing
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Integrations
-                    </a>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <h4 className="font-bold text-foreground">Resources</h4>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Documentation
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Blog
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Community
-                    </a>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <h4 className="font-bold text-foreground">Company</h4>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      About
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Contact
-                    </a>
-                    <a className="text-muted-foreground hover:text-primary" href="#">
-                      Legal
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row">
-                <p>© {new Date().getFullYear()} NYDev. All rights reserved.</p>
-                <div className="flex gap-4">
-                  <a className="hover:text-primary" href="#">
-                    Privacy Policy
-                  </a>
-                  <a className="hover:text-primary" href="#">
-                    Terms of Service
-                  </a>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </div>
         </div>
       </div>

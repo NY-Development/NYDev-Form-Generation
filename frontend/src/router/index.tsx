@@ -13,6 +13,13 @@ import Landing from '../pages/public/Landing';
 import { FormView } from '../pages/public/FormView';
 import { RegistrationSuccess } from '../pages/public/RegistrationSuccess';
 import { VerifyPage } from '../pages/public/VerifyPage';
+import AboutPage from '../pages/public/AboutPage';
+import PrivacyPolicyPage from '../pages/public/PrivacyPolicyPage';
+import TermsOfServicePage from '../pages/public/TermsOfServicePage';
+import ContactPage from '../pages/public/ContactPage';
+import FeaturesPage from '../pages/public/FeaturesPage';
+import PricingPage from '../pages/public/PricingPage';
+import DownloadAppPage from '../pages/public/DownloadAppPage';
 
 // Pages — Dashboard
 import DashboardOverview from '../pages/dashboard/Overview';
@@ -39,6 +46,13 @@ export const AppRouter = () => {
       <Routes>
         {/* ─── Public Routes ──────────────────────────────── */}
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsOfServicePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/download" element={<DownloadAppPage />} />
         <Route path="/f/:slug" element={<FormView />} />
         <Route path="/f/:slug/success" element={<RegistrationSuccess />} />
         <Route path="/verify/:id" element={<VerifyPage />} />

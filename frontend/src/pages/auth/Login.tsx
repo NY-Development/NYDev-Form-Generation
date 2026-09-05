@@ -268,8 +268,8 @@ const Login = () => {
 
         <footer className="mt-8 text-center">
           <div className="mb-4 flex items-center justify-center gap-6">
-            <a className="text-sm text-muted-foreground transition-colors hover:text-foreground" href="#">Privacy Policy</a>
-            <a className="text-sm text-muted-foreground transition-colors hover:text-foreground" href="#">Terms of Service</a>
+            <Link to="/privacy" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Terms of Service</Link>
           </div>
           <p className="text-xs text-muted-foreground/60">© {new Date().getFullYear()} NYDev. All rights reserved.</p>
         </footer>

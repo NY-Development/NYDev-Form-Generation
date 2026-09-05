@@ -1,36 +1,44 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { QrCode, Menu, X, Sun, Moon } from 'lucide-react';
 import { useUiStore } from '../../store/ui.store';
 
 export const Navbar = () => {
   const { theme, toggleTheme } = useUiStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
+  // Anchor links should navigate to homepage hash if not on home
+  const anchorHref = (hash: string) => (isHome ? hash : `/${hash}`);
 
   return (
     <>
       <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-border bg-background/80 px-4 py-3 backdrop-blur-md sm:px-10">
-        <div className="flex items-center gap-4 text-foreground">
+        <Link to="/" className="flex items-center gap-4 text-foreground transition-opacity hover:opacity-80">
           <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <QrCode className="h-5 w-5" />
           </div>
           <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">NYDev Form Generator</h2>
-        </div>
+        </Link>
         
         {/* Desktop Menu */}
         <div className="hidden flex-1 justify-end gap-8 md:flex">
           <div className="flex items-center gap-6">
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#features">
+            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href={anchorHref('#features')}>
               Features
             </a>
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#how-it-works">
+            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href={anchorHref('#how-it-works')}>
               How it Works
             </a>
-            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href="#pricing">
+            <a className="text-sm font-medium leading-normal transition-colors hover:text-primary" href={anchorHref('#pricing')}>
               Pricing
             </a>
-            <Link className="text-sm font-medium leading-normal transition-colors hover:text-primary" to="/login">
-              Login
+            <Link className="text-sm font-medium leading-normal transition-colors hover:text-primary" to="/about">
+              About
+            </Link>
+            <Link className="text-sm font-medium leading-normal transition-colors hover:text-primary" to="/download">
+              Download App
             </Link>
           </div>
           <div className="flex items-center gap-4">
@@ -72,9 +80,11 @@ export const Navbar = () => {
           </button>
         </div>
         <nav className="flex flex-col gap-2 p-4 text-foreground">
-          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href="#features" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href="#how-it-works" onClick={() => setIsMobileMenuOpen(false)}>How it Works</a>
-          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href="#pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href={anchorHref('#features')} onClick={() => setIsMobileMenuOpen(false)}>Features</a>
+          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href={anchorHref('#how-it-works')} onClick={() => setIsMobileMenuOpen(false)}>How it Works</a>
+          <a className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" href={anchorHref('#pricing')} onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+          <Link className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+          <Link className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" to="/download" onClick={() => setIsMobileMenuOpen(false)}>Download App</Link>
           <div className="my-2 border-t border-border"></div>
           <Link className="rounded-md px-4 py-3 text-base font-medium transition-colors hover:bg-muted" to="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
           <Link
